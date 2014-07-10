@@ -43,7 +43,7 @@ class DataFolder(object):
         """Change the mode of the file (default is 0666)."""
         return os.chmod(self.files[fn], mode)
 
-    def select(pattern='*'):
+    def select(self, pattern='*'):
         """List of data files that match a given pattern."""
         return fnmatch.filter(self.filenames, pattern)
 

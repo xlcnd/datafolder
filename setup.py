@@ -25,10 +25,11 @@ setup(
     version='0.0.1',
     author='xlcnd',
     author_email='xlcnd@outlook.com',
+    url='https://github.com/xlcnd/datafolder',
     packages=['datafolder'],
     license='LGPL v3',
     description='Install and access data files (conf, json, sqlite3, ...) in an easy way.',
-    keywords='packagging, setuptools, installation, discover, data files',
+    keywords='packaging, setuptools, installation, discover, data files',
     classifiers=[
         'Programming Language :: Python',
         'Programming Language :: Python :: 2',

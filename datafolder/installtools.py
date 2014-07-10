@@ -53,8 +53,8 @@ class Installer(object):
             installpath = os.path.join(homepath, self.CONFDIR)
             if not os.path.exists(installpath) and self.INSTALL:
                 print('making data dir %s' % installpath)
-                # os.mkdir(installpath)
-                # self._uxchown(installpath)
+                os.mkdir(installpath)
+                self._uxchown(installpath)
         self.DATAPATH = installpath
         return self.DATAPATH
 

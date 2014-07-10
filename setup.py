@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# installtools - easy install of data files
+# datafolder - easy install and access to data files
 # Copyright (C) 2014  Alexandre Lima Conde
 
 # This program is free software: you can redistribute it and/or modify
@@ -21,20 +21,22 @@ from setuptools import setup
 
 
 setup(
-    name='installtools',
+    name='datafolder',
     version='0.0.1',
     author='xlcnd',
     author_email='xlcnd@outlook.com',
-    packages=['installtools'],
+    packages=['datafolder'],
     license='LGPL v3',
-    description='Install data files (conf, json, sqlite3, ...) in an easy way.',
-    keywords='packagging, setuptools, installation',
+    description='Install and access data files (conf, json, sqlite3, ...) in an easy way.',
+    keywords='packagging, setuptools, installation, discover, data files',
     classifiers=[
         'Programming Language :: Python',
         'Programming Language :: Python :: 2',
         'Programming Language :: Python :: 2.6',
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3.1',
+        'Programming Language :: Python :: 3.2',
         'Programming Language :: Python :: 3.3',
         'Programming Language :: Python :: 3.4',
         'License :: OSI Approved :: GNU Lesser General Public License v3 (LGPLv3)',

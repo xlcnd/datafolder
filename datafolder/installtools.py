@@ -3,6 +3,7 @@
 
 import os
 import sys
+from .helpers import in_virtual
 
 
 class Installer(object):
@@ -16,7 +17,7 @@ class Installer(object):
         self.PIP = '-c' in self.ARGVS
         self.INSTALL = any((m in self.ARGVS for m in ('install', 'develop'))) or self.PIP
         self.WINDOWS = os.name == 'nt'
-        self.VIRTUAL = True if hasattr(sys, 'real_prefix') else False
+        self.VIRTUAL = in_virtual()
         self.SECONDRUN = self.INSTALL and not self.FIRSTRUN
         self.CONFDIR = ''
         self.DATAPATH = ''

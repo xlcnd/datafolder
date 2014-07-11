@@ -1,9 +1,10 @@
+# -*- coding: utf-8 -*-
 
 """Setup data folder at the home directory of the effective user."""
 
 import os
 import sys
-from .helpers import in_virtual
+from ._helpers import in_virtual
 
 
 class Installer(object):
@@ -41,7 +42,7 @@ class Installer(object):
                 'PYSUPPORT': self.PYSUPPORT,
                 'DATAPATH': self.DATAPATH
                 }
-              
+
     def data_path(self, datadir):
         """Make the data folder with the rigth permissions."""
         self.CONFDIR = '.' + datadir if not self.WINDOWS else datadir
@@ -71,7 +72,7 @@ class Installer(object):
                     print('changing mode of %s to 666' % dat)
                 except:
                     print('Warning: permissions not set for file %s' % dat)
-    
+
     def support(self, pys):
         """Check if the python being used for the install is supported."""
         self.PYSUPPORT = pys

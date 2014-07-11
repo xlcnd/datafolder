@@ -22,7 +22,7 @@ from setuptools import setup
 
 setup(
     name='datafolder',
-    version='0.0.1',
+    version='0.0.2',
     author='xlcnd',
     author_email='xlcnd@outlook.com',
     url='https://github.com/xlcnd/datafolder',

@@ -33,12 +33,16 @@ class DataFolder(object):
         """Verify if a file in the data folder is writable."""
         return os.access(self.files[fn], os.W_OK)
 
-    def exists(self, fn):
-        """Check if a file exists in the data folder."""
-        return True if os.path.isfile(self.files[fn]) else False
+    def exists(self, path):
+        """Check if the path is a file or a directory in the data folder."""
+        return os.path.exists(self.files[path])
 
-    def splitext(self, fn):
-        """Split the filename in name and extension."""
+    def isfile(self, fn):
+        """Check if a file exists in the data folder."""
+        return os.path.isfile(self.files[fn])
+
+    def splitbasename(self, fn):
+        """Split the basename (of a file) in name and extension."""
         return os.path.splitext(fn)
 
     def uxchmod(self, fn, mode=MODE666):

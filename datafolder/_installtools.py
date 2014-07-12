@@ -52,7 +52,7 @@ class Installer(object):
             user = '~%s' % os.getenv("SUDO_USER", '')
             homepath = os.path.expanduser(user) if not self.WINDOWS else os.getenv('APPDATA')
             installpath = os.path.join(homepath, self.CONFDIR)
-            if not os.path.exists(installpath) and self.INSTALL:
+            if not os.path.isdir(installpath) and self.INSTALL:
                 print('making data dir %s' % installpath)
                 os.mkdir(installpath)
                 self._uxchown(installpath)
@@ -64,7 +64,7 @@ class Installer(object):
         if not self.VIRTUAL and not self.WINDOWS and self.SECONDRUN:
             for dat in datafiles:
                 datp = os.path.join(self.DATAPATH, dat)
-                if not os.path.exists(datp):
+                if not os.path.isfile(datp):
                     print("Warning: file %s doesn't exist!" % datp)
                     continue
                 try:

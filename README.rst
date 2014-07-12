@@ -35,7 +35,8 @@ files will be put at the root of the environement.
 
 
 
-Use the following template for your ``setup.py``:
+Use the following template for your ``setup.py``
+(**just enter at a terminal** ``datafolder_mktpl``):
 
 .. code-block:: python
 

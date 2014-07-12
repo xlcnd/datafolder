@@ -5,6 +5,7 @@
 import os
 import sys
 from ._helpers import in_virtual
+from ._exceptions import PythonNotSupportedError as PNSErr
 
 
 class Installer(object):
@@ -28,8 +29,10 @@ class Installer(object):
     def _uxchown(fp):
         from pwd import getpwnam, getpwuid
         from grp import getgrnam, getgrgid
-        uid = getpwnam(os.getenv("SUDO_USER", getpwuid(os.getuid()).pw_name)).pw_uid
-        gid = getgrnam(os.getenv("SUDO_USER", getgrgid(os.getgid()).gr_name)).gr_gid
+        uid = getpwnam(os.getenv("SUDO_USER",
+                       getpwuid(os.getuid()).pw_name)).pw_uid
+        gid = getgrnam(os.getenv("SUDO_USER",
+                       getgrgid(os.getgid()).gr_name)).gr_gid
         os.chown(fp, uid, gid)
 
     def env(self):
@@ -50,7 +53,8 @@ class Installer(object):
             installpath = ''
         else:
             user = '~%s' % os.getenv("SUDO_USER", '')
-            homepath = os.path.expanduser(user) if not self.WINDOWS else os.getenv('APPDATA')
+            homepath = os.path.expanduser(user)\
+                if not self.WINDOWS else os.getenv('APPDATA')
             installpath = os.path.join(homepath, self.CONFDIR)
             if not os.path.isdir(installpath) and self.INSTALL:
                 print('making data dir %s' % installpath)
@@ -78,5 +82,5 @@ class Installer(object):
         self.PYSUPPORT = pys
         py = tuple(int(x) for x in sys.version[:3].split('.'))
         if py not in self.PYSUPPORT:
-            raise Exception('Python %s.%s is not supported!' % py)
+            raise PNSErr('Python %s.%s is not supported!' % py)
         return True

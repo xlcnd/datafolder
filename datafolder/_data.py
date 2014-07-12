@@ -7,6 +7,7 @@ import sys
 import fnmatch
 from stat import S_IRUSR, S_IWUSR, S_IRGRP, S_IWGRP, S_IROTH, S_IWOTH
 from ._helpers import in_virtual
+from ._exceptions import DataFolderNotFoundError as NFErr
 
 
 MODE666 = S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH | S_IWOTH
@@ -14,8 +15,22 @@ MODE666 = S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH | S_IWOTH
 
 class DataFolder(object):
 
-    def __init__(self, foldername):
+    """Discover and access to files in data folder."""
+
+    def __init__(self, foldername=None):
         """Set the basic class attributes."""
+        self.folderpath = self._find_location(foldername)
+        self.filenames = os.listdir(self.folderpath)
+        self.files = dict(((fn, os.path.join(self.folderpath, fn))
+                           for fn in self.filenames))
+        self.filepaths = list(self.files.values())
+
+    @staticmethod
+    def _find_location(foldername):
+        """Find the location of the data folder."""
+        if foldername is None and not in_virtual():
+            raise NFErr('Please supply the name of the data folder or '
+                        'then go to a virtual env.')
         if in_virtual():
             data_dir = sys.prefix
         else:
@@ -23,11 +38,9 @@ class DataFolder(object):
                 data_dir = os.path.join(os.getenv('APPDATA'), foldername)
             else:
                 data_dir = os.path.expanduser('~/.%s' % foldername)
-        self.folderpath = data_dir
-        self.filenames = os.listdir(data_dir)
-        self.files = dict(((fn, os.path.join(self.folderpath, fn))
-                           for fn in self.filenames))
-        self.filepaths = list(self.files.values())
+        if not os.path.isdir(data_dir):
+            raise NFErr("Data folder {} wasn't found!".format(foldername))
+        return data_dir
 
     def writable(self, fn):
         """Verify if a file in the data folder is writable."""

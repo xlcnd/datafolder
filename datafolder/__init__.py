@@ -18,5 +18,6 @@
 
 from ._installtools import Installer
 from ._data import DataFolder
-
+from ._exceptions import (DataFolderException, DataFolderNotFoundError,
+                          PythonNotSupportedError)
 

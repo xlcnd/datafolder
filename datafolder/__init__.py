@@ -16,6 +16,16 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+__all__ = ('Installer',
+           'DataFolder',
+           'DataFolderException',
+           'DataFolderNotFoundError',
+           'PythonNotSupportedError'
+           )
+
+__version__ = '0.0.3'                        # <-- literal IDs
+__support__ = ((2, 6), (2, 7), (3, 1), (3, 2), (3, 3), (3, 4))
+
 from ._installtools import Installer
 from ._data import DataFolder
 from ._exceptions import (DataFolderException, DataFolderNotFoundError,

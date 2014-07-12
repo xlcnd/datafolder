@@ -18,11 +18,12 @@
 
 
 from setuptools import setup
+from datafolder import __version__
 
 
 setup(
     name='datafolder',
-    version='0.0.2',
+    version=__version__,
     author='xlcnd',
     author_email='xlcnd@outlook.com',
     url='https://github.com/xlcnd/datafolder',

@@ -80,7 +80,7 @@ Use the following template for your ``setup.py``:
     setup(
         name=MYPKG,
         data_files=data_files,
-        install_requires=["datafolder>=0.0.1"],                 # <-- IMPORTANT
+        install_requires=["datafolder>=0.0.3"],                 # <-- IMPORTANT
         ...                                                     # <-- ADAPT THIS
     )
 

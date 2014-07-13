@@ -31,6 +31,8 @@ class DataFolder(object):
         if foldername is None and not in_virtual():
             raise NFErr('Please supply the name of the data folder or '
                         'then go to a virtual env.')
+        raw_foldername = foldername
+        foldername =  foldername.strip('. ')
         if in_virtual():
             data_dir = sys.prefix
         else:
@@ -39,7 +41,8 @@ class DataFolder(object):
             else:
                 data_dir = os.path.expanduser('~/.%s' % foldername)
         if not os.path.isdir(data_dir):
-            raise NFErr("Data folder {} wasn't found!".format(foldername))
+            raise NFErr("Data folder '{}' wasn't found!"
+                .format(raw_foldername))
         return data_dir
 
     def writable(self, fn):

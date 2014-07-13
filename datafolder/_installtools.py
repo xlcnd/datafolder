@@ -48,6 +48,7 @@ class Installer(object):
 
     def data_path(self, datadir):
         """Make the data folder with the rigth permissions."""
+        datadir =  datadir.strip('. ')
         self.CONFDIR = '.' + datadir if not self.WINDOWS else datadir
         if self.VIRTUAL:
             installpath = ''

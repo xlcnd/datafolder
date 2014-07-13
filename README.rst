@@ -36,16 +36,15 @@ files will be put at the root of the environement.
 
 
 Use the following template for your ``setup.py``
-(**just enter at a terminal** ``datafolder_mktpl``):
+(**just enter at a terminal** ``datafolder_mktpl`` if you already installed ``datafolder``):
 
 .. code-block:: python
 
-    ...
     import sys
     import pkg_resources
     from setuptools import setup
     from datafolder import Installer
-    ...
+
 
     # write the name of the package (in this case 'mypkg'!)
     MYPKG = 'mypkg'                                             #<-- ADAPT THIS
@@ -81,7 +80,7 @@ Use the following template for your ``setup.py``
     setup(
         name=MYPKG,
         data_files=data_files,
-        install_requires=["datafolder>=0.0.3"],                 # <-- IMPORTANT
+        install_requires=["datafolder>=0.0.4"],                 # <-- IMPORTANT
         ...                                                     # <-- ADAPT THIS
     )
 
@@ -101,16 +100,20 @@ Very easy, in your code:
 
 .. code-block:: python
 
-    ...
+
     from datafolder import DataFolder
-    ...
 
     data = DataFolder('mypkg')
 
     # now you can get the full path of each data file, e.g.
     conffile = data.files['mypkg.conf']
 
-    # do as usually...
+    # do your thing... (read, write, ...)
+
+
+For your convinience, the `DataFolder` class *discovers* the location 
+of the data folder for you and provides attributes and methods
+that make it easy to handle the files presente in the data folder.
 
 
 Feedback_, please!

@@ -76,7 +76,7 @@ Use the following template for your ``setup.py``
         DATAPATH = installer.data_path(MYPKG)
     except DataFolderException:
         # here you can handle any exception raised with the creation
-        # of the data folder... e.g. abort installation
+        # of the data folder, e.g. abort installation
         print('Abort installation')
         raise
     data_files = [(DATAPATH, MYRESOURCES)]

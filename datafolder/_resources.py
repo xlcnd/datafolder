@@ -2,29 +2,27 @@
 
 """Make setup.py template."""
 
-import os
-import sys
 
 TPL_FILE = 'setup_TPL.py'
 
 TEMPLATE = r"""
-# setup.py template make by the 'datafolder' package
+# -*- coding: utf-8 -*-
+# setup.py template made by the 'datafolder' package
 
 
 import sys
 import pkg_resources
 from setuptools import setup
 from datafolder import Installer
-#...
 
 # write the name of the package (in this case 'mypkg'!)
-MYPKG = 'mypkg'                                             #<-- ADAPT THIS
+MYPKG = 'mypkg'                                             # <-- ADAPT THIS
 
 # mypkg supports these python versions
-SUPPORT = ((2, 6), (2, 7), (3, 1), (3, 2), (3, 3), (3, 4))  #<-- ADAPT THIS
+SUPPORT = ((2, 6), (2, 7), (3, 1), (3, 2), (3, 3), (3, 4))  # <-- ADAPT THIS
 
 # list of data files in mypkg (just the names)
-MYDATAFILES = ['mypkg.conf', 'mypkg.db']                    #<-- ADAPT THIS
+MYDATAFILES = ['mypkg.conf', 'mypkg.db']                    # <-- ADAPT THIS
 
 
 # (many people get confused with the next step...)
@@ -33,7 +31,7 @@ MYDATAFILES = ['mypkg.conf', 'mypkg.db']                    #<-- ADAPT THIS
 # tell setup were these files are in your package
 # (I assume that are together with the first __init__.py)
 MYRESOURCES = [pkg_resources.resource_filename(MYPKG, datafile)
-    for datafile in MYDATAFILES]
+               for datafile in MYDATAFILES]
 
 
 # now, create the installer
@@ -50,7 +48,7 @@ data_files = [(DATAPATH, MYRESOURCES)]
 setup(
     name=MYPKG,
     data_files=data_files,
-    install_requires=["datafolder>=0.0.5"],                 # <-- IMPORTANT
+    install_requires=["datafolder>=0.0.6"],                 # <-- IMPORTANT
     ...                                                     # <-- ADAPT THIS
 )
 
@@ -59,6 +57,7 @@ setup(
 # let us fix that...
 installer.pos_setup(MYDATAFILES)
 """
+
 
 def mktpl():
     """Make template."""

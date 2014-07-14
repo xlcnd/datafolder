@@ -21,14 +21,13 @@ __all__ = ('Installer',
            'mktpl',
            'DataFolderException',
            'DataFolderNotFoundError',
-           'PythonNotSupportedError'
-           )
+           'PythonNotSupportedError')
 
-__version__ = '0.0.5'                        # <-- literal IDs
+__version__ = '0.0.6'                        # <-- literal IDs
 __support__ = ((2, 6), (2, 7), (3, 1), (3, 2), (3, 3), (3, 4))
 
-from ._installtools import Installer
 from ._data import DataFolder
-from ._resources import mktpl
 from ._exceptions import (DataFolderException, DataFolderNotFoundError,
                           PythonNotSupportedError)
+from ._installtools import Installer
+from ._resources import mktpl

@@ -35,3 +35,4 @@ release*
 .virtualenv
 *yop*
 Makefile
+.tasks

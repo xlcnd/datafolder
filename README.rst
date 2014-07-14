@@ -34,7 +34,10 @@ data folder will be put at the root of the environement.
 **How to do it?**
 
 
-(1) First, install the ``datafolder`` package. 
+(1) First, install the ``datafolder`` package::
+
+    $ pip install -U datafolder
+
 
 (2) Then enter at a teminal::
 

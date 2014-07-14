@@ -148,7 +148,7 @@ class Installer(object):
                 os.mkdir(installpath)
                 self._uxchown(installpath)
             except:
-                raise DNMErr('Abort: data folder NOT made!')
+                raise DataFolderNotMadeError('Abort: data folder NOT made!')
         self.DATAPATH = installpath
         return self.DATAPATH
 
@@ -169,7 +169,7 @@ class Installer(object):
         self.PYSUPPORT = pys
         py = tuple(int(x) for x in sys.version[:3].split('.'))
         if py not in self.PYSUPPORT:
-            raise PNSErr('Python %s.%s is not supported!' % py)
+            raise PythonNotSupportedError('Python %s.%s is not supported!' % py)
         return True
 """
 

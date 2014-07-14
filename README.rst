@@ -39,7 +39,7 @@ data folder will be put at the root of the environement.
     $ pip install -U datafolder
 
 
-(2) Then enter at a teminal::
+(2) Then, enter::
 
     $ datafolder_mkboot
 

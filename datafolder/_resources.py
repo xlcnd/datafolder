@@ -12,8 +12,12 @@ TEMPLATE = r"""
 
 import sys
 import pkg_resources
+
 from setuptools import setup
+
 from datafolder import Installer
+from datafolder import DataFolderException
+
 
 # write the name of the package (in this case 'mypkg'!)
 MYPKG = 'mypkg'                                             # <-- ADAPT THIS
@@ -29,7 +33,7 @@ MYDATAFILES = ['mypkg.conf', 'mypkg.db']                    # <-- ADAPT THIS
 
 
 # tell setup were these files are in your package
-# (I assume that are together with the first __init__.py)
+# (I assume that they are together with the first __init__.py)
 MYRESOURCES = [pkg_resources.resource_filename(MYPKG, datafile)
                for datafile in MYDATAFILES]
 
@@ -41,10 +45,16 @@ installer = Installer(sys.argv)
 installer.support(SUPPORT)
 
 # create the data folder and tell setup to put the data files there
-DATAPATH = installer.data_path(MYPKG)
+try:
+    DATAPATH = installer.data_path(MYPKG)
+except DataFolderException:
+    # here you can handle any exception raised with the creation
+    # of the data folder... e.g. abort installation
+    print('Abort installation!')
+    raise
 data_files = [(DATAPATH, MYRESOURCES)]
 
-# setup can now do his thing...
+# now, setup can do his thing...
 setup(
     name=MYPKG,
     data_files=data_files,
@@ -54,7 +64,7 @@ setup(
 
 # but we are NOT READY, in some cases the data files
 # don't have the appropriate permissions,
-# let us fix that...
+# let's fix that...
 installer.pos_setup(MYDATAFILES)
 """
 

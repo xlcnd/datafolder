@@ -3,4 +3,4 @@ v0.0.2, 2014-07-11 -- Better documentation, virtual API.
 v0.0.3, 2014-07-12 -- Exceptions.
 v0.0.4, 2014-07-13 -- Make 'setup.py template' script.
 v0.0.5, 2014-07-14 -- Fix  BUG: MYDAFILES.
-v0.0.6, 2014-07-14 -- TENTATIVE.
+v0.0.6, 2014-07-14 -- Data folder (on virtual environments) IS a folder.

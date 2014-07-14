@@ -2,12 +2,14 @@
 
 """Setup data folder at the home directory of the effective user."""
 
+import fnmatch
 import os
 import sys
-import fnmatch
+
 from stat import S_IRUSR, S_IWUSR, S_IRGRP, S_IWGRP, S_IROTH, S_IWOTH
-from ._helpers import in_virtual
+
 from ._exceptions import DataFolderNotFoundError as NFErr
+from ._helpers import in_virtual
 
 
 MODE666 = S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH | S_IWOTH
@@ -28,13 +30,12 @@ class DataFolder(object):
     @staticmethod
     def _find_location(foldername):
         """Find the location of the data folder."""
-        if foldername is None and not in_virtual():
-            raise NFErr('Please supply the name of the data folder or '
-                        'then go to a virtual env.')
+        if foldername is None:
+            raise NFErr('Please supply the name of the data folder')
         raw_foldername = foldername
-        foldername =  foldername.strip('. ')
+        foldername = foldername.strip('. ')
         if in_virtual():
-            data_dir = sys.prefix
+            data_dir = os.path.join(sys.prefix, foldername)
         else:
             if os.name == 'nt':
                 data_dir = os.path.join(os.getenv('APPDATA'), foldername)
@@ -42,7 +43,7 @@ class DataFolder(object):
                 data_dir = os.path.expanduser('~/.%s' % foldername)
         if not os.path.isdir(data_dir):
             raise NFErr("Data folder '{}' wasn't found!"
-                .format(raw_foldername))
+                        .format(raw_foldername))
         return data_dir
 
     def writable(self, fn):

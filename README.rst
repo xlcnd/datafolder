@@ -34,17 +34,29 @@ data folder will be put at the root of the environement.
 **How to do it?**
 
 
+(1) First, install the ``datafolder`` package. Then enter at a teminal::
 
-Use the following template for your ``setup.py``
-(**just enter at a terminal** ``datafolder_mktpl`` if you already installed ``datafolder``):
+    $ datafolder_mkboot
+
+It will make a file called `bootdf.py` that you **must** put in your `mypkg` directory.
+
+
+(2) Then, enter::
+
+    $ datafolder_mktpl
+
+it will create a new file called `setup_TPL.py` that you **must** put at the root of your project.
+
+
+(3) That file is a template that you have to adapt to your case:
 
 .. code-block:: python
 
     import sys
     import pkg_resources
     from setuptools import setup
-    from datafolder import Installer
-    from datafolder import DataFolderException
+ 
+    from mypkg.bootdf import Installer, DataFolderException     #<-- ADAPT THIS
 
 
     # write the name of the package (in this case 'mypkg'!)
@@ -54,6 +66,7 @@ Use the following template for your ``setup.py``
     SUPPORT = ((2, 6), (2, 7), (3, 1), (3, 2), (3, 3), (3, 4))  #<-- ADAPT THIS
 
     # list of data files in mypkg (just the names)
+    # [don't forget to include these files in MANIFEST.in!]
     MYDATAFILES = ['mypkg.conf', 'mypkg.db']                    #<-- ADAPT THIS
 
 
@@ -84,6 +97,7 @@ Use the following template for your ``setup.py``
     # now, setup can do his thing...
     setup(
         name=MYPKG,
+        packages=[MYPKG],                                       # <-- ADAPT THIS
         data_files=data_files,
         install_requires=["datafolder>=0.0.6"],                 # <-- IMPORTANT
         ...                                                     # <-- ADAPT THIS
@@ -95,8 +109,10 @@ Use the following template for your ``setup.py``
     installer.pos_setup(MYDATAFILES)
 
 
+(4) Now, rename the file to 'setup.py'.
 
 **And that is all!**
+
 
 "But, **I have the reverse problem**, how can I access these files in my code?"
 I heard you say.

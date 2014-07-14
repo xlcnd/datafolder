@@ -1,9 +1,12 @@
 # -*- coding: utf-8 -*-
 
-"""Make setup.py template."""
+"""Make setup.py template and bootdf.py bootloader."""
+
+import os
 
 
 TPL_FILE = 'setup_TPL.py'
+BOOT_FILE = 'bootdf.py'
 
 TEMPLATE = r"""
 # -*- coding: utf-8 -*-
@@ -15,8 +18,7 @@ import pkg_resources
 
 from setuptools import setup
 
-from datafolder import Installer
-from datafolder import DataFolderException
+from mypkg.bootdf import Installer, DataFolderException     # <-- ADAPT THIS
 
 
 # write the name of the package (in this case 'mypkg'!)
@@ -26,6 +28,7 @@ MYPKG = 'mypkg'                                             # <-- ADAPT THIS
 SUPPORT = ((2, 6), (2, 7), (3, 1), (3, 2), (3, 3), (3, 4))  # <-- ADAPT THIS
 
 # list of data files in mypkg (just the names)
+# [don't forget to include these files in MANIFEST.in!]
 MYDATAFILES = ['mypkg.conf', 'mypkg.db']                    # <-- ADAPT THIS
 
 
@@ -49,7 +52,7 @@ try:
     DATAPATH = installer.data_path(MYPKG)
 except DataFolderException:
     # here you can handle any exception raised with the creation
-    # of the data folder... e.g. abort installation
+    # of the data folder, e.g., abort installation
     print('Abort installation!')
     raise
 data_files = [(DATAPATH, MYRESOURCES)]
@@ -57,6 +60,7 @@ data_files = [(DATAPATH, MYRESOURCES)]
 # now, setup can do his thing...
 setup(
     name=MYPKG,
+    packages=[MYPKG],                                       # <-- ADAPT THIS
     data_files=data_files,
     install_requires=["datafolder>=0.0.6"],                 # <-- IMPORTANT
     ...                                                     # <-- ADAPT THIS
@@ -73,3 +77,13 @@ def mktpl():
     """Make template."""
     with open(TPL_FILE, 'w') as f:
         f.write(TEMPLATE)
+
+def mkboot():
+    """Make bootloader file."""
+    pkg_path = os.path.dirname(__file__)
+    with open(os.path.join(pkg_path, '_bootdf.py'), 'r') as f:
+        content = f.read()
+    with open('bootdf.py', 'w') as f:
+        f.write(content)
+   
+    

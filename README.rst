@@ -61,7 +61,7 @@ Use the following template for your ``setup.py``
 
     # tell setup were these files are in your package
     # (I assume that are together with the first __init__.py)
-    MYRESOURCES = [pkg_resources.resource_filename(MYPKG, datafile) 
+    MYRESOURCES = [pkg_resources.resource_filename(MYPKG, datafile)
         for datafile in MYDATAFILES]
 
     # now, create the installer
@@ -109,7 +109,7 @@ Very easy, in your code:
     # do your thing... (read, write, ...)
 
 
-For your convinience, the `DataFolder` class *discovers* the location 
+For your convinience, the `DataFolder` class *discovers* the location
 of the data folder for you and provides attributes and methods
 that make it easy to handle the files presente in the data folder.
 

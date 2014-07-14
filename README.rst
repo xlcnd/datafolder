@@ -34,21 +34,23 @@ data folder will be put at the root of the environement.
 **How to do it?**
 
 
-(1) First, install the ``datafolder`` package. Then enter at a teminal::
+(1) First, install the ``datafolder`` package. 
+
+(2) Then enter at a teminal::
 
     $ datafolder_mkboot
 
 It will make a file called `bootdf.py` that you **must** put in your `mypkg` directory.
 
 
-(2) Then, enter::
+(3) Then, enter::
 
     $ datafolder_mktpl
 
 it will create a new file called `setup_TPL.py` that you **must** put at the root of your project.
 
 
-(3) That file is a template that you have to adapt to your case:
+(4) That file is a template that you have to adapt to your case:
 
 .. code-block:: python
 
@@ -109,7 +111,7 @@ it will create a new file called `setup_TPL.py` that you **must** put at the roo
     installer.pos_setup(MYDATAFILES)
 
 
-(4) Now, rename the file to 'setup.py'.
+(5) Now, rename the file to 'setup.py'.
 
 **And that is all!**
 
@@ -133,7 +135,7 @@ Very easy, in your code:
 
 
 For your convinience, the `DataFolder` class *discovers* the location
-of the data folder for you and provides attributes and methods
+of the data folder for you and provides attributes and methods,
 that make it easy to handle the files presente in the data folder.
 
 

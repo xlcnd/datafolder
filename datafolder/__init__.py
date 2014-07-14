@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# installtools - easy install of data files 
+# datafolder - easy install of data files
 # Copyright (C) 2014  Alexandre Lima Conde
 
 # This program is free software: you can redistribute it and/or modify
@@ -24,7 +24,7 @@ __all__ = ('Installer',
            'PythonNotSupportedError'
            )
 
-__version__ = '0.0.4'                        # <-- literal IDs
+__version__ = '0.0.5'                        # <-- literal IDs
 __support__ = ((2, 6), (2, 7), (3, 1), (3, 2), (3, 3), (3, 4))
 
 from ._installtools import Installer
@@ -32,4 +32,3 @@ from ._data import DataFolder
 from ._resources import mktpl
 from ._exceptions import (DataFolderException, DataFolderNotFoundError,
                           PythonNotSupportedError)
-

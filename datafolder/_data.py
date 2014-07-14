@@ -24,7 +24,7 @@ import sys
 
 from stat import S_IRUSR, S_IWUSR, S_IRGRP, S_IWGRP, S_IROTH, S_IWOTH
 
-from ._exceptions import DataFolderNotFoundError as NFErr
+from ._exceptions import DataFolderNotFoundError
 from ._helpers import in_virtual
 
 
@@ -33,10 +33,12 @@ MODE666 = S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH | S_IWOTH
 
 class DataFolder(object):
 
-    """Discover and access to files in data folder."""
+    """Discover data folder and access to his files."""
 
-    def __init__(self, foldername=None):
+    def __init__(self, foldername):
         """Set the basic class attributes."""
+        if not foldername:
+            raise DataFolderNotFoundError('Supply the name of the data folder')
         self.folderpath = self._find_location(foldername)
         self.filenames = os.listdir(self.folderpath)
         self.files = dict(((fn, os.path.join(self.folderpath, fn))
@@ -46,8 +48,6 @@ class DataFolder(object):
     @staticmethod
     def _find_location(foldername):
         """Find the location of the data folder."""
-        if foldername is None:
-            raise NFErr('Please supply the name of the data folder')
         raw_foldername = foldername
         foldername = foldername.strip('. ')
         if in_virtual():
@@ -58,8 +58,8 @@ class DataFolder(object):
             else:
                 data_dir = os.path.expanduser('~/.%s' % foldername)
         if not os.path.isdir(data_dir):
-            raise NFErr("Data folder '{}' wasn't found!"
-                        .format(raw_foldername))
+            raise DataFolderNotFoundError("Data folder '{}' wasn't found!"
+                                          .format(raw_foldername))
         return data_dir
 
     def writable(self, fn):

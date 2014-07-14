@@ -62,7 +62,7 @@ setup(
     name=MYPKG,
     packages=[MYPKG],                                       # <-- ADAPT THIS
     data_files=data_files,
-    install_requires=["datafolder>=0.0.6"],                 # <-- IMPORTANT
+    install_requires=["datafolder>=0.0.7"],                 # <-- IMPORTANT
     ...                                                     # <-- ADAPT THIS
 )
 

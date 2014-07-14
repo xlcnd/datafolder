@@ -16,13 +16,3 @@ class DataFolderException(Exception):
 class DataFolderNotFoundError(DataFolderException):
 
     """Exception to be raised when the data folder is not found."""
-
-
-class DataFolderNotMadeError(DataFolderException):
-
-    """Exception to be raised when the data folder is not made."""
-
-
-class PythonNotSupportedError(DataFolderException):
-
-    """Exception to be raised when the python version is not supported."""

@@ -58,15 +58,15 @@ it will create a new file called `setup_TPL.py` that you **must** put at the roo
     import pkg_resources
     from setuptools import setup
  
-    from mypkg.bootdf import Installer
+    from mypkg.bootdf import Installer                         # <-- ADAPT THIS
 
 
     # write the name of the package (in this case 'mypkg'!)
-    MYPKG = 'mypkg'                                             #<-- ADAPT THIS
+    MYPKG = 'mypkg'                                            # <-- ADAPT THIS
 
     # list of data files in mypkg (just the names)
     # [don't forget to include these files in MANIFEST.in!]
-    MYDATAFILES = ['mypkg.conf', 'mypkg.db']                    #<-- ADAPT THIS
+    MYDATAFILES = ['mypkg.conf', 'mypkg.db']                   # <-- ADAPT THIS
 
     # tell setup were these files are in your package
     # (I assume that they are together with the first __init__.py)
@@ -83,9 +83,9 @@ it will create a new file called `setup_TPL.py` that you **must** put at the roo
     # now, setup can do his thing...
     setup(
         name=MYPKG,
-        packages=[MYPKG],                                       # <-- ADAPT THIS
+        packages=[MYPKG],                                      # <-- ADAPT THIS
         data_files=data_files,
-        install_requires=["datafolder>=0.0.6"],                 # <-- IMPORTANT
+        install_requires=["datafolder>=0.0.6"],                # <-- IMPORTANT
     )
 
     # but we are NOT READY, in some cases the data files

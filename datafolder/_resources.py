@@ -62,7 +62,7 @@ setup(
     name=MYPKG,
     packages=[MYPKG],                                       # <-- ADAPT THIS
     data_files=data_files,
-    install_requires=["datafolder>=0.0.7"],                 # <-- IMPORTANT
+    install_requires=["datafolder>=0.0.8"],                 # <-- IMPORTANT
     ...                                                     # <-- ADAPT THIS
 )
 
@@ -182,5 +182,3 @@ def mkboot():
     """Make bootloader file."""
     with open(BOOT_FILE, 'w') as f:
         f.write(BOOT)
-   
-    

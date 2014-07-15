@@ -17,7 +17,6 @@ import sys
 import pkg_resources
 
 from setuptools import setup
-
 from mypkg.bootdf import Installer, DataFolderException     # <-- ADAPT THIS
 
 

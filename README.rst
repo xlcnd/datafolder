@@ -17,10 +17,11 @@ I assume that (1) you have layout your project like::
     README.rst
     setup.py
     mypkg
-        |_ __init__.py
-        |_ mypkg.conf
-        |_ mypkg.db
-        |_ ...
+        │
+        ├── __init__.py
+        ├── mypkg.conf
+        ├── mypkg.db
+        └── ...
 
 
 And that (2) you want to put a folder, in the home directory of the user

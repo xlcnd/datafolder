@@ -89,7 +89,7 @@ it will create a new file called `setup_TPL.py` that you **must** put at the roo
         name=MYPKG,
         packages=[MYPKG],                                      # <-- ADAPT THIS
         data_files=data_files,
-        install_requires=["datafolder>=0.0.8"],
+        install_requires=["datafolder>=0.0.9"],
     )
 
     # but we are NOT READY, in some cases the data files

@@ -40,14 +40,14 @@ data folder will be put at the root of the environement.
     $ pip install -U datafolder
 
 
-(2) Then, enter::
+(2) Then, type::
 
     $ datafolder_mkboot
 
 It will make a file called `bootdf.py` that you **must** put in your `mypkg` directory.
 
 
-(3) Then, enter::
+(3) Then, type::
 
     $ datafolder_mktpl
 
@@ -100,6 +100,17 @@ it will create a new file called `setup_TPL.py` that you **must** put at the roo
 
 
 (5) Now, rename the file to 'setup.py'.
+
+(6) Write your 'README.in' file (this is the cause of many problems!). Should look like this::
+
+    include *.txt
+    include *.md
+    include *.rst
+    recursive-include mypkg *.conf
+    recursive-include mypkg *.rst
+    recursive-include mypkg *.db
+
+
 
 **And that is all!**
 

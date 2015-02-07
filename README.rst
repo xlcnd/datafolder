@@ -98,11 +98,9 @@ data folder will be put at the root of the environement.
     # let us fix that...
     installer.pos_setup(MYDATAFILES)
 
+(5) Now, **rename** the file to **setup.py**.
 
-(5) Now, **rename** the file to 'setup.py'.
-
-
-(6) Write your 'README.in' file (**missing this step is the cause of many problems!**). Should look like this:
+(6) Write your **README.in** file (**missing this step is the cause of many problems!**). Should look like this:
 
 .. code-block:: console
 
@@ -112,7 +110,6 @@ data folder will be put at the root of the environement.
     recursive-include mypkg *.conf
     recursive-include mypkg *.rst
     recursive-include mypkg *.db
-
 
 
 **And that is all!**

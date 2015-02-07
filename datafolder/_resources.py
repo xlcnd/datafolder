@@ -165,7 +165,9 @@ class Installer(object):
                 except:
                     print('Warning: permissions not set for file %s' % dat)
 
-    def support(self, pys):
+    def support(self, pys=None):
+        if not pys:
+            return True
         self.PYSUPPORT = pys
         py = sys.version[:3]
         if py not in self.PYSUPPORT:

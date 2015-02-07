@@ -40,6 +40,7 @@ class DataFolder(object):
         if not foldername:
             raise DataFolderNotFoundError('Supply the name of the data folder')
         self.folderpath = self._find_location(foldername)
+        # NOTE: sub-folders are NOT supported!
         self.filenames = os.listdir(self.folderpath)
         self.files = dict(((fn, os.path.join(self.folderpath, fn))
                            for fn in self.filenames))
@@ -49,7 +50,7 @@ class DataFolder(object):
     def _find_location(foldername):
         """Find the location of the data folder."""
         raw_foldername = foldername
-        foldername = foldername.strip('. ')
+        foldername = foldername.strip('.')
         if in_virtual():
             data_dir = os.path.join(sys.prefix, foldername)
         else:

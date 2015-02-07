@@ -60,6 +60,7 @@ it will create a new file called `setup_TPL.py` that you **must** put at the roo
 
     import sys
     import pkg_resources
+
     from setuptools import setup
  
     from mypkg.bootdf import Installer                         # <-- ADAPT THIS
@@ -87,9 +88,9 @@ it will create a new file called `setup_TPL.py` that you **must** put at the roo
     # now, setup can do his thing...
     setup(
         name=MYPKG,
-        packages=[MYPKG],                                      # <-- ADAPT THIS
+        packages=[MYPKG,'other_packg1','other_packg2'],        # <-- ADAPT THIS
         data_files=data_files,
-        install_requires=["datafolder>=0.0.9"],
+        ...                                                    # <-- ADAPT THIS
     )
 
     # but we are NOT READY, in some cases the data files
@@ -127,6 +128,11 @@ that make it easy to handle the files presente in the data folder.
 
 
 Feedback_, please!
+
+
+   **REMARK**: as you can see above, this only works if the
+   install method uses ``setup.py``. Is **not** the case
+   of *python wheels*!
 
 
 .. _Feedback: https://github.com/xlcnd/datafolder/issues

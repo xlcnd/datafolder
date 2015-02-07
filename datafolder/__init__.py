@@ -22,7 +22,7 @@ __all__ = ('DataFolder',
            'DataFolderException',
            'DataFolderNotFoundError')
 
-__version__ = '0.0.8'                        # <-- literal IDs
+__version__ = '0.0.9'                        # <-- literal IDs
 __support__ = ((2, 6), (2, 7), (3, 1), (3, 2), (3, 3), (3, 4))
 
 from ._data import DataFolder

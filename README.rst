@@ -99,7 +99,8 @@ it will create a new file called `setup_TPL.py` that you **must** put at the roo
     installer.pos_setup(MYDATAFILES)
 
 
-(5) Now, rename the file to 'setup.py'.
+(5) Now, **rename** the file to 'setup.py'.
+
 
 (6) Write your 'README.in' file (**missing this step is the cause of many problems!**). Should look like this:
 

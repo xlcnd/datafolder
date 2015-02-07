@@ -60,7 +60,7 @@ setup(
     name=MYPKG,
     packages=[MYPKG, "other_packg1", "other_packg2"],       # <-- ADAPT THIS
     data_files=data_files,
-    install_requires=["datafolder>=0.0.9"],
+    install_requires=["datafolder>=0.1.1"],
     ...                                                     # <-- ADAPT THIS
 )
 
@@ -81,7 +81,7 @@ import os
 import sys
 
 
-__version__ = '0.0.9'
+__version__ = '0.1.1'
 
 
 def in_virtual():

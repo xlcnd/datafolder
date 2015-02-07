@@ -6,7 +6,7 @@ the user's home directory and find it difficult with ``setuptools``, then here
 is some help.
 
 
-   **WARNING**: this is pre-alpha software!!!
+   **WARNING**: this is alpha software!
 
 
 First, let's make life easier and use some 'configuration by convention'.
@@ -90,6 +90,7 @@ it will create a new file called `setup_TPL.py` that you **must** put at the roo
         name=MYPKG,
         packages=[MYPKG,'other_packg1','other_packg2'],        # <-- ADAPT THIS
         data_files=data_files,
+        install_requires=["datafolder>=0.1.1"],
         ...                                                    # <-- ADAPT THIS
     )
 

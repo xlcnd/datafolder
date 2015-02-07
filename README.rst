@@ -44,14 +44,14 @@ data folder will be put at the root of the environement.
 
     $ datafolder_mkboot
 
-It will make a file called `bootdf.py` that you **must** put in your `mypkg` directory.
+    It will make a file called `bootdf.py` that you **must** put in your `mypkg` directory.
 
 
 (3) Then, type::
 
     $ datafolder_mktpl
 
-it will create a new file called `setup_TPL.py` that you **must** put at the root of your project.
+    it will create a new file called `setup_TPL.py` that you **must** put at the root of your project.
 
 
 (4) That file is a template that you have to adapt to your case:

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-"""Make setup.py template and bootdf.py bootloader."""
+"""Make setup.py template and bootdf.py bootloader and service."""
 
 import os
 
@@ -8,7 +8,7 @@ import os
 TPL_FILE = 'setup_TPL.py'
 BOOT_FILE = 'bootdf.py'
 
-TEMPLATE = r"""# -*- coding: utf-8 -*-
+TEMPLATE = r'''# -*- coding: utf-8 -*-
 # setup.py template made by the 'datafolder' package
 
 
@@ -67,7 +67,7 @@ setup(
 # don't have the appropriate permissions,
 # let's fix that...
 installer.pos_setup(MYDATAFILES)
-"""
+'''
 
 
 BOOT = r'''# -*- coding: utf-8 -*-
@@ -191,9 +191,12 @@ class DataFolder(object):
 
     def __init__(self, foldername):
         """Set the basic class attributes."""
+        # TODO try the name of the package!
         if not foldername:
             raise DataFolderNotFoundError('Supply the name of the data folder')
         self.folderpath = self._find_location(foldername)
+        if not self.folderpath:
+            raise DataFolderNotFoundError('Supply the name of the data folder')
         # NOTE: sub-folders are NOT supported!
         self.filenames = os.listdir(self.folderpath)
         self.files = dict(((fn, os.path.join(self.folderpath, fn))

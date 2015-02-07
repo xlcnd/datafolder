@@ -16,15 +16,13 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-__all__ = ('DataFolder',
-           'mktpl',
+__all__ = ('mktpl',
            'mkboot',
            'DataFolderException',
            'DataFolderNotFoundError')
 
-__version__ = '0.1.1'                        # <-- literal IDs
-__support__ = ((2, 6), (2, 7), (3, 1), (3, 2), (3, 3), (3, 4))
+__version__ = '0.1.1'                                       # <-- literal IDs
+__support__ = ('2.6', '2.7', '3.1', '3.2', '3.3', '3.4')    # <-- literal IDs
 
-from ._data import DataFolder
-from ._exceptions import (DataFolderException, DataFolderNotFoundError)
+
 from ._resources import mktpl, mkboot

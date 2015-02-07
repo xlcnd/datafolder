@@ -46,7 +46,7 @@ setup(
         'Programming Language :: Python :: 3.4',
         'License :: OSI Approved :: GNU Lesser General Public License v3 (LGPLv3)',
         'Operating System :: OS Independent',
-        'Development Status :: 2 - Pre-Alpha',
+        'Development Status :: 3 - Alpha',
         'Intended Audience :: Developers',
         'Environment :: Console',
         'Topic :: System :: Installation/Setup',

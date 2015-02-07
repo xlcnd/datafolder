@@ -90,7 +90,6 @@ it will create a new file called `setup_TPL.py` that you **must** put at the roo
         name=MYPKG,
         packages=[MYPKG,'other_packg1','other_packg2'],        # <-- ADAPT THIS
         data_files=data_files,
-        install_requires=["datafolder>=0.1.1"],
         ...                                                    # <-- ADAPT THIS
     )
 
@@ -113,7 +112,7 @@ Very easy, in your code:
 .. code-block:: python
 
 
-    from datafolder import DataFolder
+    from bootdf import DataFolder
 
     data = DataFolder('mypkg')
 

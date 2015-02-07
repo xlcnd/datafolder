@@ -101,7 +101,9 @@ it will create a new file called `setup_TPL.py` that you **must** put at the roo
 
 (5) Now, rename the file to 'setup.py'.
 
-(6) Write your 'README.in' file (this is the cause of many problems!). Should look like this::
+(6) Write your 'README.in' file (**missing this step is the cause of many problems!**). Should look like this:
+
+.. code-block:: console
 
     include *.txt
     include *.md

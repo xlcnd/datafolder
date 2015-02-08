@@ -137,6 +137,13 @@ For your convinience, the `DataFolder` class *discovers* the location
 of the data folder for you and provides attributes and methods,
 that make it easy to handle the files presente in the data folder.
 
+To install, type:
+
+.. code-block:: console
+
+    $ pip install -U datafolder
+
+
 
 Feedback_, please!
 

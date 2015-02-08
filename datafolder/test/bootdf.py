@@ -86,10 +86,14 @@ class Installer(object):
                 if not self.WINDOWS else os.getenv('APPDATA')
             installpath = os.path.join(homepath, self.CONFDIR)
         if not os.path.isdir(installpath) and self.INSTALL:
-            print('making data folder %s' % installpath)
-            os.mkdir(installpath)
-            if not self.WINDOWS:
-                self._uxchown(installpath)
+            try:
+                print('making data folder %s' % installpath)
+                os.mkdir(installpath)
+                if not self.WINDOWS:
+                    self._uxchown(installpath)
+            except:
+                msg = 'Abort: data folder NOT made with path %s!' % installpath
+                raise DataFolderNotMadeError(msg)
         self.DATAPATH = installpath
         return self.DATAPATH
 

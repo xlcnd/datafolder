@@ -161,7 +161,8 @@ class Installer(object):
             try:
                 print('making data folder %s' % installpath)
                 os.mkdir(installpath)
-                self._uxchown(installpath)
+                if not self.WINDOWS:
+                    self._uxchown(installpath)
             except:
                 msg = 'Abort: data folder NOT made with path %s!' % installpath
                 raise DataFolderNotMadeError(msg)

@@ -37,7 +37,7 @@ def setup_module():
 
 def teardown_module():
     delete_files(FILES)
-    os.rmdir(DATAPATH)
+    # os.rmdir(DATAPATH) # doesn't work in appveyor (Windows)
 
 
 inst_run1 = Installer(['python', 'setup.py', 'egg_info'])

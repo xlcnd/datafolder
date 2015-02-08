@@ -12,7 +12,7 @@ the user's home directory and find it difficult with ``setuptools``, then here
 is some help.
 
 
-   **WARNING**: this is alpha software!
+   **WARNING**: this is beta software!
 
 
 First, let's make life easier and use some 'configuration by convention'.

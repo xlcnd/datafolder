@@ -103,10 +103,10 @@ class DataFolderException(Exception):
     """
     pass
 
-class DataFolderNotMadeError(DataFolderException): 
+class DataFolderNotMadeError(DataFolderException):
     pass
 
-class PythonNotSupportedError(DataFolderException): 
+class PythonNotSupportedError(DataFolderException):
     pass
 
 
@@ -191,7 +191,7 @@ class DataFolder(object):
 
     """Discover data folder and access to his files."""
 
-    def __init__(self, foldername):
+    def __init__(self, foldername=None):
         """Set the basic class attributes."""
         if not foldername:
             # try the name of the current folder (~ package)

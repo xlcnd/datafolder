@@ -1,3 +1,9 @@
+.. image:: https://travis-ci.org/xlcnd/datafolder.svg?branch=dev
+    :target: https://travis-ci.org/xlcnd/datafolder
+    :alt: Built Status
+
+
+
 ``datafolder`` is a small python library that makes it very easy to **install**
 the `data files` of your package and **access** them later.
 

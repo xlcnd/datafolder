@@ -87,7 +87,7 @@ from stat import S_IRUSR, S_IWUSR, S_IRGRP, S_IWGRP, S_IROTH, S_IWOTH
 MODE666 = S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH | S_IWOTH
 
 
-__version__ = '0.1.1'
+__version__ = '0.1.3'
 
 
 def in_virtual():

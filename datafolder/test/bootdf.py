@@ -91,7 +91,8 @@ class Installer(object):
                 os.mkdir(installpath)
                 self._uxchown(installpath)
             except:
-                raise DataFolderNotMadeError('Abort: data folder NOT made!')
+                msg = 'Abort: data folder NOT made with path %s!' % installpath
+                raise DataFolderNotMadeError(msg)
         self.DATAPATH = installpath
         return self.DATAPATH
 

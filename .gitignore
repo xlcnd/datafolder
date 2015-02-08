@@ -31,7 +31,7 @@ LIB
 LAB*
 CHECKLIST
 TODO
-release*
+*release*
 .virtualenv
 *yop*
 Makefile

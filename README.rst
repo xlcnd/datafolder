@@ -143,7 +143,7 @@ Feedback_, please!
 
    **REMARK**: as you can see above, this only works if the
    install method uses ``setup.py``. Is **not** the case
-   of *python wheels*!
+   of *python wheels* however!
 
 
 .. _Feedback: https://github.com/xlcnd/datafolder/issues

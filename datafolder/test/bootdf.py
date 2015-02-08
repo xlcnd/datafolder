@@ -88,7 +88,8 @@ class Installer(object):
         if not os.path.isdir(installpath) and self.INSTALL:
             print('making data folder %s' % installpath)
             os.mkdir(installpath)
-            self._uxchown(installpath)
+            if not self.WINDOWS:
+                self._uxchown(installpath)
         self.DATAPATH = installpath
         return self.DATAPATH
 

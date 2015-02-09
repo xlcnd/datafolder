@@ -50,8 +50,8 @@ data folder will be put at the root of the environement.
 
     $ datafolder -m
 
-    It will make a file called ``bootdf.py`` that you **must** put inside in your ``mypkg`` directory and 
-    a new file called ``setup_TPL.py`` that you **must** put at the root of your project.
+    It will make a file called ``bootdf.py`` that you **must** put inside your ``mypkg`` directory and 
+    a new file called ``setup_TPL.py`` that you **must** put in the root of your project.
 
 
 (3) ``setup_TPL.py`` is a template that you have to adapt to your case:
@@ -114,7 +114,9 @@ data folder will be put at the root of the environement.
 
 **And that is all!**
 
-But **with version 0.2.1** it is **even better**!
+
+    But **with version 0.2.1** it is **even better**!
+
 
 (1) Just go to the root of you project and in a terminal type::
 

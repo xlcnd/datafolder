@@ -10,7 +10,7 @@ TEMPLATE = r'''# -*- coding: utf-8 -*-
 import sys
 import pkg_resources
 
-from setuptools import setup
+from setuptools import find_packages, setup
 
 from mypkg.bootdf import Installer, DataFolderException     # <-- ADAPT THIS
 
@@ -53,7 +53,7 @@ data_files = [(DATAPATH, MYRESOURCES)]
 # now, setup can do his thing...
 setup(
     name=MYPKG,
-    packages=[MYPKG, "other_packg1", "other_packg2"],       # <-- ADAPT THIS
+    packages=find_packages(),                               # <-- ADAPT THIS
     data_files=data_files,
     ...                                                     # <-- ADAPT THIS
 )

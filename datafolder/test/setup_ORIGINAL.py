@@ -1,23 +1,24 @@
 # -*- coding: utf-8 -*-
-# setup.py template made by the 'datafolder' package
+# setup.py template made by the 'datafolder' package 
+# for the datafolder project.
 
 
 import sys
 import pkg_resources
 
-from setuptools import setup
+from setuptools import find_packages, setup
 
-from mypkg.bootdf import Installer, DataFolderException     # <-- ADAPT THIS
+from datafolder.bootdf import Installer, DataFolderException
 
 # write the name of the package (in this case 'mypkg'!)
-MYPKG = 'mypkg'                                             # <-- ADAPT THIS
+MYPKG = 'datafolder'
 
-# mypkg supports these python versions
+# datafolder supports these python versions
 SUPPORT = ('2.6', '2.7', '3.1', '3.2', '3.3', '3.4')        # <-- ADAPT THIS
 
-# list of data files in mypkg (just the names)
+# list of data files in datafolder (just the names)
 # [don't forget to include these files in MANIFEST.in!]
-MYDATAFILES = ['mypkg.conf', 'mypkg.db']                    # <-- ADAPT THIS
+MYDATAFILES = ['test.conf', 'test.cvs', 'test.dat', 'test.db', 'test.yaml', 'çtest.pdf']
 
 
 # (many people get confused with the next step...)
@@ -48,7 +49,7 @@ data_files = [(DATAPATH, MYRESOURCES)]
 # now, setup can do his thing...
 setup(
     name=MYPKG,
-    packages=[MYPKG, "other_packg1", "other_packg2"],       # <-- ADAPT THIS
+    packages=find_packages(),
     data_files=data_files,
     ...                                                     # <-- ADAPT THIS
 )

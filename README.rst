@@ -106,7 +106,7 @@ data folder will be put at the root of the environement.
 
 (5) Now, **rename** the file to **setup.py**.
 
-(6) Write your **README.in** file (**missing this step is the cause of many problems!**). Should look like this:
+(6) Write your **MANIFEST.in** file (**missing this step is the cause of many problems!**). Should look like this:
 
 .. code-block:: console
 

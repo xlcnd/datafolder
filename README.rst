@@ -48,19 +48,13 @@ data folder will be put at the root of the environement.
 
 (2) Then, type::
 
-    $ datafolder_mkboot
+    $ datafolder -m
 
-    It will make a file called ``bootdf.py`` that you **must** put in your ``mypkg`` directory.
-
-
-(3) Then, type::
-
-    $ datafolder_mktpl
-
-    it will create a new file called ``setup_TPL.py`` that you **must** put at the root of your project.
+    It will make a file called ``bootdf.py`` that you **must** put inside in your ``mypkg`` directory and 
+    a new file called ``setup_TPL.py`` that you **must** put at the root of your project.
 
 
-(4) That file is a template that you have to adapt to your case:
+(3) ``setup_TPL.py`` is a template that you have to adapt to your case:
 
 .. code-block:: python
 
@@ -104,9 +98,9 @@ data folder will be put at the root of the environement.
     # let us fix that...
     installer.pos_setup(MYDATAFILES)
 
-(5) Now, **rename** the file to **setup.py**.
+(4) Now, **rename** the file to **setup.py**.
 
-(6) Write your **MANIFEST.in** file (**missing this step is the cause of many problems!**). Should look like this:
+(5) Write your **MANIFEST.in** file (**missing this step is the cause of many problems!**). Should look like this:
 
 .. code-block:: console
 
@@ -119,6 +113,18 @@ data folder will be put at the root of the environement.
 
 
 **And that is all!**
+
+But **with version 0.2.1** it is **even better**!
+
+(1) Just go to the root of you project and in a terminal type::
+
+    $ datafolder 'mypkg'
+
+(2) Now, you will see that ``MANIFEST.in`` and ``setup.py`` were fill in for you and
+    ``bootdf.py`` is already inside ``mypkg`` folder. **You only need to complete ``setup.py``
+    as need** (the fields ``author``, ``email``, ``url`` and classification troves...).
+
+
 
 
 "But, **I have the reverse problem**, how can I access these files in my code?"

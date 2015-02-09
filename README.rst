@@ -124,12 +124,12 @@ data folder will be put at the root of the environement.
 "But, **I have the reverse problem**, how can I access these files in my code?"
 I heard you say.
 
-Very easy, in your code:
+Very easy, in your code (for a file in the same folder as ``bootdf.py``):
 
 .. code-block:: python
 
 
-    from bootdf import DataFolder
+    from .bootdf import DataFolder
 
     data = DataFolder('mypkg')
 
@@ -139,7 +139,7 @@ Very easy, in your code:
     # do your thing... (read, write, ...)
 
 
-For your convinience, the `DataFolder` class *discovers* the location
+For your convinience, the ``DataFolder`` class *discovers* the location
 of the data folder for you and provides attributes and methods,
 that make it easy to handle the files presente in the data folder.
 

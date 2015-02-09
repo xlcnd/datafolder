@@ -78,14 +78,17 @@ def datafiles(path):
 
 
 def usage():
-    print('Usage: datafolder [PROJNAME|-m]')
+    print('Usage: datafolder [PROJNAME|-m|-h|--help]')
     print('      -m    manual mode (generates bootdf.py and setup_TPL.py)')
+    print('      -h    this message')
     sys.exit(1)
 
 
 def parse(args):
     """Parses the sys.argv like args."""
     if len(args) < 2:
+        return (args[0], None, True)
+    if '-h' in args or '--help' in args:
         usage()
     if '-m' in args:
         return (args[0], None, True)

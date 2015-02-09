@@ -48,7 +48,7 @@ data folder will be put at the root of the environement.
 
 (2) Then, type::
 
-    $ datafolder -m
+    $ datafolder
 
     It will make a file called ``bootdf.py`` that you **must** put inside your ``mypkg`` directory and 
     a new file called ``setup_TPL.py`` that you **must** put in the root of your project.

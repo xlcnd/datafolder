@@ -1,12 +1,7 @@
 # -*- coding: utf-8 -*-
 
-"""Make setup.py template and bootdf.py bootloader and service."""
+"""Template strings for setup.py and bootdf.py."""
 
-import os
-
-
-TPL_FILE = 'setup_TPL.py'
-BOOT_FILE = 'bootdf.py'
 
 TEMPLATE = r'''# -*- coding: utf-8 -*-
 # setup.py template made by the 'datafolder' package
@@ -253,13 +248,3 @@ class DataFolder(object):
         """List of data files that match a given pattern."""
         return fnmatch.filter(self.filenames, pattern)
 '''
-
-def mktpl():
-    """Make template."""
-    with open(TPL_FILE, 'w') as f:
-        f.write(TEMPLATE)
-
-def mkboot():
-    """Make bootloader file."""
-    with open(BOOT_FILE, 'w') as f:
-        f.write(BOOT)

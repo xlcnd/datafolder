@@ -22,4 +22,4 @@ __version__ = '0.1.4'                                       # <-- literal IDs
 __support__ = ('2.6', '2.7', '3.1', '3.2', '3.3', '3.4')    # <-- literal IDs
 
 
-from ._resources import mktpl, mkboot
+from ._cli import mkboot, mktpl

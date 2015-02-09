@@ -50,14 +50,14 @@ data folder will be put at the root of the environement.
 
     $ datafolder_mkboot
 
-    It will make a file called `bootdf.py` that you **must** put in your `mypkg` directory.
+    It will make a file called ``bootdf.py`` that you **must** put in your ``mypkg`` directory.
 
 
 (3) Then, type::
 
     $ datafolder_mktpl
 
-    it will create a new file called `setup_TPL.py` that you **must** put at the root of your project.
+    it will create a new file called ``setup_TPL.py`` that you **must** put at the root of your project.
 
 
 (4) That file is a template that you have to adapt to your case:
@@ -68,7 +68,7 @@ data folder will be put at the root of the environement.
     import pkg_resources
 
     from setuptools import setup
- 
+
     from mypkg.bootdf import Installer                         # <-- ADAPT THIS
 
 
@@ -113,9 +113,9 @@ data folder will be put at the root of the environement.
     include *.txt
     include *.md
     include *.rst
-    recursive-include mypkg *.conf
-    recursive-include mypkg *.rst
-    recursive-include mypkg *.db
+    include mypkg/*.conf
+    include mypkg/*.rst
+    include mypkg/*.db
 
 
 **And that is all!**

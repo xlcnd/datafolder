@@ -118,7 +118,7 @@ But **with version 0.2.1** it is **even better**!
 
 (1) Just go to the root of you project and in a terminal type::
 
-    $ datafolder 'mypkg'
+    $ datafolder mypkg
 
 (2) Now, you will see that ``MANIFEST.in`` and ``setup.py`` were fill in for you and
     ``bootdf.py`` is already inside ``mypkg`` folder. **You only need to complete ``setup.py``
@@ -149,11 +149,6 @@ For your convinience, the ``DataFolder`` class *discovers* the location
 of the data folder for you and provides attributes and methods,
 that make it easy to handle the files presente in the data folder.
 
-To install, type:
-
-.. code-block:: console
-
-    $ pip install -U datafolder
 
 
 

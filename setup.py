@@ -29,8 +29,8 @@ setup(
     url='https://github.com/xlcnd/datafolder',
     packages=['datafolder'],
     entry_points={
-        'console_scripts': ['datafolder_mktpl=datafolder._resources:mktpl',
-                            'datafolder_mkboot=datafolder._resources:mkboot']},
+        'console_scripts': ['datafolder_mktpl=datafolder._cli:mktpl',
+                            'datafolder_mkboot=datafolder._cli:mkboot']},
     license='LGPL v3',
     description='Install and access data files (conf, json, sqlite3, ...) in an easy way.',
     keywords='packaging, setuptools, installation, discover, data files',

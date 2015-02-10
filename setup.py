@@ -38,7 +38,7 @@ setup(
     packages=['datafolder'],
     entry_points={
         'console_scripts': ['datafolder=datafolder._cli:main']},
-    license='LGPL v3',
+    license='MIT',
     description='Install and access data files (conf, json, sqlite3, ...) in an easy way.',
     keywords='packaging, setuptools, installation, discover, data files',
     classifiers=[

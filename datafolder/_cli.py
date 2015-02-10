@@ -77,6 +77,16 @@ def datafiles(path):
     return sorted([f for f in dirfiles(path) if os.path.splitext(f)[1].lower() not in PYFILES])
 
 
+def exts(files):
+    """Tuple of extensions of list of files."""
+    return tuple(set([os.path.splitext(f)[1] for f in files if os.path.splitext(f)[1]]))
+
+
+def noextfiles(files):
+    """Tuple of files without extension in a list of files."""
+    return tuple(set([f for f in files if not os.path.splitext(f)[1]]))
+
+
 def usage():
     print('Usage: datafolder [PROJNAME|-m|-h|--help]')
     print('      -m    manual mode (generates bootdf.py and setup_TPL.py)')
@@ -112,13 +122,18 @@ def main(args=None):
     backup_file('setup.py')
     backup_file('MANIFEST.in')
     df = datafiles(mypkg)
+    dx = exts(df)
     if df:
         print('Making setup.py ...')
         dataf = "['" + "', '".join(df) + "']"
         content = TPLSMART.format(mypkg=mypkg, datafiles=dataf)
         write2file('setup.py', content)
-        tpl = EOL + "include {mypkg}/"
-        content = "include {mypkg}/" + tpl.join(df) + EOL
+        tpl = EOL + "include {mypkg}/*"
+        content = "include {mypkg}/*" + tpl.join(dx) + EOL
+        noextf = noextfiles(df)
+        if noextf:
+            tpl = EOL + "include {mypkg}/"
+            content += "include {mypkg}/" + tpl.join(noextf) + EOL
         content = content.format(mypkg=mypkg)
         print('Making MANIFEST.in ...')
         mkmanifest(content)

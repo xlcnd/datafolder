@@ -18,7 +18,7 @@ SUPPORT = ('2.6', '2.7', '3.1', '3.2', '3.3', '3.4')        # <-- ADAPT THIS
 
 # list of data files in prjname (just the names)
 # [don't forget to include these files in MANIFEST.in!]
-MYDATAFILES = ['.yaml', 'test.conf', 'test.cvs', 'test.dat', 'test.db', 'test.yaml', 'çtest.pdf']
+MYDATAFILES = ['.yaml', 'NOEXT FILE', 'test.conf', 'test.cvs', 'test.dat', 'test.db', 'test.yaml', 'çtest.pdf']
 
 
 # (many people get confused with the next step...)
@@ -58,7 +58,7 @@ setup(
     description='',            # <-- ADAPT THIS
     classifiers=[
         'Programming Language :: Python',
-        ...                    # <-- ADAPT THIS
+        ...  # <-- ADAPT THIS (https://pypi.python.org/pypi?%3Aaction=list_classifiers)
     ],
 )
 

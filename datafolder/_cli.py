@@ -13,7 +13,8 @@ from ._resources import BOOT, TPLDUMB, TPLSMART
 PY2 = sys.version < '3'
 TPL_FILE = 'setup_TPL.py'
 BOOT_FILE = 'bootdf.py'
-PYFILES = ('.py', '.pyc', '.pyw')
+PYFILES = ('.py', '.pyc', '.pyw', '.po', '.pyo')
+MANIFESTDEF = ('*.txt', '*.rst', '*.md')
 WINDOWS = os.name == 'nt'
 EOL = '\r\n' if WINDOWS and not PY2 else '\n'
 
@@ -128,8 +129,10 @@ def main(args=None):
         dataf = "['" + "', '".join(df) + "']"
         content = TPLSMART.format(mypkg=mypkg, datafiles=dataf)
         write2file('setup.py', content)
+        tpl = EOL + "include "
+        content = "include " + tpl.join(MANIFESTDEF) + EOL        
         tpl = EOL + "include {mypkg}/*"
-        content = "include {mypkg}/*" + tpl.join(dx) + EOL
+        content += "include {mypkg}/*" + tpl.join(dx) + EOL
         noextf = noextfiles(df)
         if noextf:
             tpl = EOL + "include {mypkg}/"

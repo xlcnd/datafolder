@@ -25,8 +25,8 @@
 # SOFTWARE.
 
 
-from setuptools import setup
 from datafolder import __version__
+from setuptools import setup
 
 
 setup(

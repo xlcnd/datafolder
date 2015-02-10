@@ -4,7 +4,6 @@
 
 import os
 import sys
-
 from shutil import copy2 as copyfile
 
 from ._resources import BOOT, TPLDUMB, TPLSMART

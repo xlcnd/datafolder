@@ -104,12 +104,12 @@ def parse(args):
     if '-m' in args:
         return (args[0], None, True)
     return (args[0], args[1], False)
-    
+
 
 def main(args=None):
     if not args:
         args = sys.argv
-    cmd, mypkg, manual = parse(args)
+    _, mypkg, manual = parse(args)
     if manual:
         mkboot()
         mktpl()
@@ -130,7 +130,7 @@ def main(args=None):
         content = TPLSMART.format(mypkg=mypkg, datafiles=dataf)
         write2file('setup.py', content)
         tpl = EOL + "include "
-        content = "include " + tpl.join(MANIFESTDEF) + EOL        
+        content = "include " + tpl.join(MANIFESTDEF) + EOL
         tpl = EOL + "include {mypkg}/*"
         content += "include {mypkg}/*" + tpl.join(dx) + EOL
         noextf = noextfiles(df)
@@ -142,4 +142,3 @@ def main(args=None):
         mkmanifest(content)
     print('Making bootdf.py inside %s ...' % mypkg)
     mkboot(mypkg)
-    

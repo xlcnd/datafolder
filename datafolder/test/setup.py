@@ -51,7 +51,15 @@ setup(
     name=MYPKG,
     packages=find_packages(),
     data_files=data_files,
-    ...                                                     # <-- ADAPT THIS
+    author='',                 # <-- ADAPT THIS
+    author_email='...@...',    # <-- ADAPT THIS
+    url='',                    # <-- ADAPT THIS
+    license='',                # <-- ADAPT THIS
+    description='',            # <-- ADAPT THIS
+    classifiers=[
+        'Programming Language :: Python',
+        ...                    # <-- ADAPT THIS
+    ],
 )
 
 # but we are NOT READY, in some cases the data files

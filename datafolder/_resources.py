@@ -63,7 +63,7 @@ setup(
     description='',            # <-- ADAPT THIS
     classifiers=[
         'Programming Language :: Python',
-        ...                    # <-- ADAPT THIS
+        ...  # <-- ADAPT THIS (https://pypi.python.org/pypi?%3Aaction=list_classifiers)
     ],
 )
 
@@ -133,7 +133,7 @@ setup(
     description='',            # <-- ADAPT THIS
     classifiers=[
         'Programming Language :: Python',
-        ...                    # <-- ADAPT THIS
+        ...  # <-- ADAPT THIS (https://pypi.python.org/pypi?%3Aaction=list_classifiers)
     ],
 )
 

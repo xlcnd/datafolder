@@ -53,7 +53,7 @@ def mkboot(projdir=None):
 
 def mktpl():
     """Make template."""
-    write2file(TPL_FILE,  TPLDUMB)
+    write2file(TPL_FILE, TPLDUMB)
 
 
 def mkmanifest(content):
@@ -73,7 +73,7 @@ def dirfiles(path):
 
 
 def datafiles(path):
-    """Sorted list of datafiles (non python files) for directory 'path'."""
+    """Sorted list of datafiles, non python files, for directory 'path'."""
     return sorted([f for f in dirfiles(path) if os.path.splitext(f)[1].lower() not in PYFILES])
 
 

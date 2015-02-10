@@ -81,7 +81,7 @@ TPLDUMB = r'''# -*- coding: utf-8 -*-
 import sys
 import pkg_resources
 
-from setuptools import find_packages, setup
+from setuptools import setup
 
 from mypkg.bootdf import Installer, DataFolderException     # <-- ADAPT THIS
 
@@ -124,7 +124,7 @@ data_files = [(DATAPATH, MYRESOURCES)]
 # now, setup can do his thing...
 setup(
     name=MYPKG,
-    packages=find_packages(),  # <-- ADAPT THIS
+    packages=[MYPKG,'other_packg1'],  # <-- ADAPT THIS
     data_files=data_files,
     author='',                 # <-- ADAPT THIS
     author_email='...@...',    # <-- ADAPT THIS

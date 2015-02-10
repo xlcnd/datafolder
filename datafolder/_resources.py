@@ -7,6 +7,9 @@ TPLSMART = r'''# -*- coding: utf-8 -*-
 # setup.py template made by the 'datafolder' package 
 # for the {mypkg} project.
 
+# If you need help about packaging, read 
+# https://python-packaging-user-guide.readthedocs.org/en/latest/distributing.html
+
 
 import sys
 import pkg_resources
@@ -76,6 +79,9 @@ installer.pos_setup(MYDATAFILES)
 
 TPLDUMB = r'''# -*- coding: utf-8 -*-
 # setup.py template made by the 'datafolder' package
+
+# If you need help about packaging, read 
+# https://python-packaging-user-guide.readthedocs.org/en/latest/distributing.html
 
 
 import sys

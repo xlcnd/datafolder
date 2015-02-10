@@ -2,6 +2,9 @@
 # setup.py template made by the 'datafolder' package 
 # for the prjname project.
 
+# If you need help about packaging, read 
+# https://python-packaging-user-guide.readthedocs.org/en/latest/distributing.html
+
 
 import sys
 import pkg_resources
@@ -18,7 +21,7 @@ SUPPORT = ('2.6', '2.7', '3.1', '3.2', '3.3', '3.4')        # <-- ADAPT THIS
 
 # list of data files in prjname (just the names)
 # [don't forget to include these files in MANIFEST.in!]
-MYDATAFILES = ['.yaml', 'NOEXT FILE', 'test.conf', 'test.cvs', 'test.dat', 'test.db', 'test.yaml', 'çtest.pdf']
+MYDATAFILES = ['.yaml', 'NOEXTFILE', 'test.conf', 'test.cvs', 'test.dat', 'test.db', 'test.yaml', 'çtest.pdf']
 
 
 # (many people get confused with the next step...)

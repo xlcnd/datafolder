@@ -124,7 +124,7 @@ data folder will be put at the root of the environement.
 
 (2) Now, you will see that ``MANIFEST.in`` and ``setup.py`` were fill in for you and
     ``bootdf.py`` is already inside the ``mypkg`` folder. **You only need to complete** ``setup.py``
-    **as need** (the fields ``author``, ``email``, ``url`` and classification troves...).
+    **as need** (the fields ``author``, ``email``, ``url`` and trove classifiers ...).
 
 
 

@@ -8,7 +8,6 @@ from shutil import copy2 as copyfile
 
 from ._resources import BOOT, TPLDUMB, TPLSMART
 
-
 PY2 = sys.version < '3'
 TPL_FILE = 'setup_TPL.py'
 BOOT_FILE = 'bootdf.py'

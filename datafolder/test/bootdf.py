@@ -38,11 +38,15 @@ from stat import S_IRUSR, S_IWUSR, S_IRGRP, S_IWGRP, S_IROTH, S_IWOTH
 MODE666 = S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH | S_IWOTH
 
 
-__version__ = '0.2.2'
+__version__ = '0.2.3'
 
 
-def in_virtual():
-    return True if hasattr(sys, 'real_prefix') else False
+LINUX = sys.platform == 'linux2'
+OSX = sys.platform == 'darwin'
+POSIX = os.name == 'posix'
+WINDOWS = sys.platform == 'win32'
+
+VIRTUAL = True if hasattr(sys, 'real_prefix') else False
 
 
 class DataFolderException(Exception):
@@ -72,7 +76,10 @@ class Installer(object):
         self.INSTALL = any((m in self.ARGVS for m in ('install', 'develop')))\
             or self.PIP
         self.WINDOWS = os.name == 'nt'
-        self.VIRTUAL = in_virtual()
+        self.POSIX = POSIX
+        self.OSX = OSX
+        self.LINUX = LINUX
+        self.VIRTUAL = VIRTUAL
         self.SECONDRUN = self.INSTALL and not self.FIRSTRUN
         self.CONFDIR = ''
         self.DATAPATH = ''
@@ -93,6 +100,9 @@ class Installer(object):
                 'SECONDRUN': self.SECONDRUN,
                 'INSTALL': self.INSTALL,
                 'WINDOWS': self.WINDOWS,
+                'OSX': self.OSX,
+                'LINUX': self.LINUX,
+                'POSIX': self.POSIX,
                 'VIRTUAL': self.VIRTUAL,
                 'PYSUPPORT': self.PYSUPPORT,
                 'DATAPATH': self.DATAPATH}
@@ -168,7 +178,7 @@ class DataFolder(object):
         """Find the location of the data folder."""
         raw_foldername = foldername
         foldername = foldername.strip('.')
-        if in_virtual():
+        if VIRTUAL:
             data_dir = os.path.join(sys.prefix, foldername)
         else:
             if os.name == 'nt':

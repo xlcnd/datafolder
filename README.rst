@@ -118,7 +118,7 @@ data folder will be put at the root of the environement.
     But **with version 0.2.1** it is **even better**!
 
 
-(1) Just go to the root of you project and in a terminal type::
+(1) Just **go to the root of you project** and in a terminal type::
 
     $ datafolder mypkg
 

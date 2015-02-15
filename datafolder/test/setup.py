@@ -40,6 +40,7 @@ installer = Installer(sys.argv)
 installer.support(SUPPORT)
 
 # check if there are already data files and make a backup
+# (comment the next line if you want the pip's default behaviour)
 installer.backup(MYPKG, files=MYDATAFILES)
 
 # create the data folder and tell setup to put the data files there
@@ -48,8 +49,7 @@ try:
 except DataFolderException:
     # here you can handle any exception raised with the creation
     # of the data folder, e.g., abort installation
-    print('Abort installation!')
-    raise
+    raise Exception('Abort installation!')
 data_files = [(DATAPATH, MYRESOURCES)]
 
 # now, setup can do his thing...

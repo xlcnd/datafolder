@@ -75,14 +75,13 @@ def find_location(foldername):
                 if os.path.isdir(place):
                     data_dir = place
                     break
-    if not os.path.isdir(data_dir):
-        raise DataFolderNotFoundError("Data folder '{}' wasn't found!"
-                                      .format(raw_foldername))
-    return data_dir
+    return data_dir if os.path.isdir(data_dir) else None
 
 def data_files(foldername):
     """Tuple of datafiles with full path."""
     folderpath = find_location(foldername)
+    if not folderpath:
+        return ()
     filenames = os.listdir(folderpath)
     return (os.path.join(folderpath, fn) for fn in filenames)
 
@@ -161,7 +160,8 @@ class Installer(object):
                 'DATAPATH': self.DATAPATH}
 
     def data_path(self, datadir):
-        # TODO this runs when? SECONDRUN?
+        if not self.SECONDRUN:
+            return
         datadir = datadir.strip('. ')
         self.CONFDIR = '.' + datadir if not self.WINDOWS else datadir
         if self.VIRTUAL:
@@ -185,13 +185,24 @@ class Installer(object):
         return self.DATAPATH
 
     def backup(self, datadir, files=None):
-        if not self.SECONDRUN:
-            return True
+        """Backup data files.
+
+        On FIRSTRUN pip deletes the original files
+        (even if they have been customized)
+        and deletes the directory (if empty).
+        """ 
+        if not self.FIRSTRUN:
+            # Do nothing!
+            return False
         if files:
             datafolder = find_location(datadir)
+            if not datafolder:
+                return False
             dfiles = (os.path.join(datafolder,fn) for fn in files)
         else:
             dfiles = data_files(datadir)
+            if not dfiles:
+                return False
         for fp in dfiles:
             backup_file(fp)
         return True 
@@ -210,7 +221,7 @@ class Installer(object):
                     print('Warning: permissions not set for file %s' % dat)
 
     def support(self, pys=None):
-        if not self.FISTRUN:
+        if not self.FIRSTRUN:
             return True
         if not pys:
             return True

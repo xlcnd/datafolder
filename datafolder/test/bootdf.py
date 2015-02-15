@@ -29,17 +29,19 @@
 
 ###         PUT THIS FILE INSIDE YOUR PROJECT
 
+__version__ = '0.2.3'
+
 import fnmatch
 import os
 import sys
 
+from shutil import copy2 as copyfile
 from stat import S_IRUSR, S_IWUSR, S_IRGRP, S_IWGRP, S_IROTH, S_IWOTH
 
+
+## ENV
+
 MODE666 = S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH | S_IWOTH
-
-
-__version__ = '0.2.3'
-
 
 LINUX = sys.platform == 'linux2'
 OSX = sys.platform == 'darwin'
@@ -48,6 +50,54 @@ WINDOWS = sys.platform == 'win32'
 
 VIRTUAL = True if hasattr(sys, 'real_prefix') else False
 
+
+## HELPERS
+
+def find_location(foldername):
+    """Find the location of the data folder."""
+    raw_foldername = foldername
+    foldername = foldername.strip('.')
+    if VIRTUAL:
+        data_dir = os.path.join(sys.prefix, foldername)
+    else:
+        if WINDOWS:
+            data_dir = os.path.join(os.getenv('APPDATA'), foldername)
+        else:
+            places = (
+                '/etc/.%s' % foldername,
+                '/usr/local/bin/.%s' % foldername,
+                '/usr/local/.%s' % foldername,
+                os.path.expanduser('~/.local/.%s' % foldername),
+                os.path.expanduser('~/.%s' % foldername)
+            )
+            data_dir = None
+            for place in reversed(places):
+                if os.path.isdir(place):
+                    data_dir = place
+                    break
+    if not os.path.isdir(data_dir):
+        raise DataFolderNotFoundError("Data folder '{}' wasn't found!"
+                                      .format(raw_foldername))
+    return data_dir
+
+def data_files(foldername):
+    """Tuple of datafiles with full path."""
+    folderpath = find_location(foldername)
+    filenames = os.listdir(folderpath)
+    return (os.path.join(folderpath, fn) for fn in filenames)
+
+def backup_file(fp):
+    """Append _ORIGINAL or _BACKUP to the file name."""
+    if os.path.isfile(fp):
+        name, ext = os.path.splitext(fp)
+        newfp = name + '_ORIGINAL' + ext
+        if os.path.isfile(newfp):
+            newfp = name + '_BACKUP' + ext
+        return copyfile(fp, newfp)
+    return
+
+
+## MAIN CLASSES
 
 class DataFolderException(Exception):
     """Base exception for 'datafolder' package.
@@ -69,6 +119,9 @@ class DataFolderNotFoundError(DataFolderException):
 
 
 class Installer(object):
+
+    """Installs the datafiles."""
+
     def __init__(self, sysargv):
         self.ARGVS = sysargv
         self.FIRSTRUN = 'egg_info' in self.ARGVS
@@ -108,6 +161,7 @@ class Installer(object):
                 'DATAPATH': self.DATAPATH}
 
     def data_path(self, datadir):
+        # TODO this runs when? SECONDRUN?
         datadir = datadir.strip('. ')
         self.CONFDIR = '.' + datadir if not self.WINDOWS else datadir
         if self.VIRTUAL:
@@ -130,6 +184,18 @@ class Installer(object):
         self.DATAPATH = installpath
         return self.DATAPATH
 
+    def backup(self, datadir, files=None):
+        if not self.SECONDRUN:
+            return True
+        if files:
+            datafolder = find_location(datadir)
+            dfiles = (os.path.join(datafolder,fn) for fn in files)
+        else:
+            dfiles = data_files(datadir)
+        for fp in dfiles:
+            backup_file(fp)
+        return True 
+
     def pos_setup(self, datafiles):
         if not self.WINDOWS and self.SECONDRUN:
             for dat in datafiles:
@@ -144,6 +210,8 @@ class Installer(object):
                     print('Warning: permissions not set for file %s' % dat)
 
     def support(self, pys=None):
+        if not self.FISTRUN:
+            return True
         if not pys:
             return True
         self.PYSUPPORT = pys
@@ -164,7 +232,7 @@ class DataFolder(object):
             foldername = os.path.basename(os.path.abspath(__file__))
             if not foldername:
                 raise DataFolderNotFoundError('Supply the name of the data folder')
-        self.folderpath = self._find_location(foldername)
+        self.folderpath = find_location(foldername)
         if not self.folderpath:
             raise DataFolderNotFoundError('Supply the name of the data folder')
         # NOTE: sub-folders are NOT supported!
@@ -172,23 +240,6 @@ class DataFolder(object):
         self.files = dict(((fn, os.path.join(self.folderpath, fn))
                            for fn in self.filenames))
         self.filepaths = list(self.files.values())
-
-    @staticmethod
-    def _find_location(foldername):
-        """Find the location of the data folder."""
-        raw_foldername = foldername
-        foldername = foldername.strip('.')
-        if VIRTUAL:
-            data_dir = os.path.join(sys.prefix, foldername)
-        else:
-            if os.name == 'nt':
-                data_dir = os.path.join(os.getenv('APPDATA'), foldername)
-            else:
-                data_dir = os.path.expanduser('~/.%s' % foldername)
-        if not os.path.isdir(data_dir):
-            raise DataFolderNotFoundError("Data folder '{}' wasn't found!"
-                                          .format(raw_foldername))
-        return data_dir
 
     def writable(self, fn):
         """Verify if a file in the data folder is writable."""

@@ -39,6 +39,9 @@ installer = Installer(sys.argv)
 # use the installer to check supported python versions
 installer.support(SUPPORT)
 
+# check if there are already data files and make a backup
+installer.backup(MYPKG, files=MYDATAFILES)
+
 # create the data folder and tell setup to put the data files there
 try:
     DATAPATH = installer.data_path(MYPKG)

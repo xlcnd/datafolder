@@ -14,4 +14,4 @@ v0.1.4, 2015-02-09 -- Split templates and cli (towards 'smart fill-in').
 v0.2.1, 2015-02-10 -- Now with 'smart mode'.
 v0.2.2, 2015-02-10 -- More smarts and links to help (MIT License).
 v0.2.3, 2015-02-14 -- More env variables.
-v0.3.1, 2015-02-14 -- TENTATIVE 
+v0.3.1, 2015-02-16 -- Backup datafiles if already present (default). 

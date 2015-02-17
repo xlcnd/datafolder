@@ -258,7 +258,7 @@ class DataFolder(object):
 
     def exists(self, path):
         """Check if the path is a file or a directory in the data folder."""
-        return os.path.exists(self.files[path])
+        return os.path.exists(os.path.join(self.folderpath, path))
 
     def isfile(self, fn):
         """Check if a file exists in the data folder."""

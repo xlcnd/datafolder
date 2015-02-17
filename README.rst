@@ -142,7 +142,7 @@ Very easy, in your code (for a file in the same folder as ``bootdf.py``):
     data = DataFolder('mypkg')
 
     # now you can get the full path of each data file, e.g.
-    conffile = data.files['mypkg.conf']
+    conf_fp = data.files['mypkg.conf']
 
     # do your thing... (read, write, ...)
 

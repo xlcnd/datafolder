@@ -240,7 +240,7 @@ class DataFolder(object):
         """Set the basic class attributes."""
         if not foldername:
             # try the name of the current folder (~ package)
-            foldername = os.path.basename(os.path.abspath(__file__))
+            foldername = os.path.basename(os.path.dirname(os.path.abspath(__file__)))
             if not foldername:
                 raise DataFolderNotFoundError('Supply the name of the data folder')
         self.folderpath = find_location(foldername)

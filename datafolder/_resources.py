@@ -4,10 +4,10 @@
 
 
 TPLSMART = r'''# -*- coding: utf-8 -*-
-# setup.py template made by the 'datafolder' package 
+# setup.py template made by the 'datafolder' package
 # for the {mypkg} project.
 
-# If you need help about packaging, read 
+# If you need help about packaging, read
 # https://python-packaging-user-guide.readthedocs.org/en/latest/distributing.html
 
 
@@ -44,9 +44,19 @@ installer = Installer(sys.argv)
 # use the installer to check supported python versions
 installer.support(SUPPORT)
 
-# check if there are already data files and make a backup
-# (comment the next line if you want the pip's default behaviour)
-installer.backup(MYPKG, files=MYDATAFILES)
+# checks if there are already data files and makes a backup
+# (uncomment if you want backup all datafiles)
+# but probably YOU ARE BETTER SERVED with 'protect'!
+# installer.backup(MYPKG, files=MYDATAFILES)
+
+# protects data files from overwritten on updates, if files
+# like 'mypkg.conf' exist they are not overwritten,
+# by default '.conf', '.cfg', '.ini' and '.yaml' files
+#  are protected, you can change this by passing
+#  e.g. fns=('*.db','data.csv')
+# (comment the next line if you want the pip's
+#  default behaviour of overwritten the datafiles)
+MYDATAFILES = installer.protect(MYPKG, MYDATAFILES)
 
 # create the data folder and tell setup to put the data files there
 try:
@@ -83,7 +93,7 @@ installer.pos_setup(MYDATAFILES)
 TPLDUMB = r'''# -*- coding: utf-8 -*-
 # setup.py template made by the 'datafolder' package
 
-# If you need help about packaging, read 
+# If you need help about packaging, read
 # https://python-packaging-user-guide.readthedocs.org/en/latest/distributing.html
 
 
@@ -120,8 +130,18 @@ installer = Installer(sys.argv)
 installer.support(SUPPORT)
 
 # checks if there are already data files and makes a backup
-# (comment the next line if you want the pip's default behaviour)
-installer.backup(MYPKG, files=MYDATAFILES)
+# (uncomment if you want backup all datafiles)
+# but probably YOU ARE BETTER SERVED with 'protect'!
+# installer.backup(MYPKG, files=MYDATAFILES)
+
+# protects data files from overwritten on updates, if files
+# like 'mypkg.conf' exist they are not overwritten,
+# by default '.conf', '.cfg', '.ini' and '.yaml' files
+#  are protected, you can change this by passing
+#  e.g. fns=('*.db','data.csv')
+# (comment the next line if you want the pip's
+#  default behaviour of overwritten the datafiles)
+MYDATAFILES = installer.protect(MYPKG, MYDATAFILES)
 
 # create the data folder and tell setup to put the data files there
 try:
@@ -195,6 +215,8 @@ import sys
 from shutil import copy2 as copyfile
 from stat import S_IRUSR, S_IWUSR, S_IRGRP, S_IWGRP, S_IROTH, S_IWOTH
 
+PROTECT_DEFAULTS = ('*.conf', '*.cfg', '*.ini', '*.yaml')
+
 
 ## ENV
 
@@ -212,7 +234,6 @@ VIRTUAL = True if hasattr(sys, 'real_prefix') else False
 
 def find_location(foldername):
     """Find the location of the data folder."""
-    raw_foldername = foldername
     foldername = foldername.strip('.')
     if VIRTUAL:
         data_dir = os.path.join(sys.prefix, foldername)
@@ -319,7 +340,7 @@ class Installer(object):
     def data_path(self, datadir):
         if not self.SECONDRUN:
             return
-        datadir = datadir.strip('. ')
+        datadir = datadir.strip('.')
         self.CONFDIR = '.' + datadir if not self.WINDOWS else datadir
         if self.VIRTUAL:
             virtualpath = sys.prefix
@@ -341,13 +362,39 @@ class Installer(object):
         self.DATAPATH = installpath
         return self.DATAPATH
 
+
+    def protect(self, datadir, datafiles, fns=None):
+        """Protect datafiles from overwriten.
+
+        Only installs files if don't exist yet.
+        """
+        if not self.FIRSTRUN:
+            # Do nothing!
+            return datafiles
+        if not fns:
+            fns = PROTECT_DEFAULTS
+        datafolder = find_location(datadir)
+        if not datafolder:
+            return datafiles
+        fnsindir = os.listdir(datafolder)
+        fnfilter = []
+        for fn in fns:
+            if '*' in fn:
+                filels = fnmatch.filter(fnsindir, fn)
+                fnfilter.extend(filels)
+            else:
+                if fn in fnsindir:
+                    fnfilter.append(file)
+        return (file for file in datafiles if file not in fnfilter)
+
+
     def backup(self, datadir, files=None):
         """Backup data files.
 
         On FIRSTRUN pip deletes the original files
         (even if they have been customized)
         and deletes the directory (if empty).
-        """ 
+        """
         if not self.FIRSTRUN:
             # Do nothing!
             return False
@@ -362,7 +409,7 @@ class Installer(object):
                 return False
         for fp in dfiles:
             backup_file(fp)
-        return True 
+        return True
 
     def pos_setup(self, datafiles):
         if not self.WINDOWS and self.SECONDRUN:

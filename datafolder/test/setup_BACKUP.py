@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-# setup.py template made by the 'datafolder' package 
+# setup.py template made by the 'datafolder' package
 # for the prjname project.
 
-# If you need help about packaging, read 
+# If you need help about packaging, read
 # https://python-packaging-user-guide.readthedocs.org/en/latest/distributing.html
 
 
@@ -39,9 +39,18 @@ installer = Installer(sys.argv)
 # use the installer to check supported python versions
 installer.support(SUPPORT)
 
-# check if there are already data files and make a backup
-# (comment the next line if you want the pip's default behaviour)
-installer.backup(MYPKG, files=MYDATAFILES)
+# checks if there are already data files and makes a backup
+# but probably YOU ARE BETTER SERVED with 'protect'
+# installer.backup(MYPKG, files=MYDATAFILES)
+
+# protects data files from overriden on updates, if files
+# like 'mypkg.conf' exist they are not overriden
+# (by default '.conf', '.cfg', '.ini' and '.yaml' files
+#  are protected, you can change this by passing
+#  e.g. 'fns=('*.db','data.csv')')
+# (comment the next line if you want the pip's
+#  default behaviour of overriden the datafiles)
+MYDATAFILES = installer.protect(MYPKG, MYDATAFILES)
 
 # create the data folder and tell setup to put the data files there
 try:

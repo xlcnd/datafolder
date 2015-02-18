@@ -40,18 +40,7 @@ installer = Installer(sys.argv)
 installer.support(SUPPORT)
 
 # checks if there are already data files and makes a backup
-# (uncomment if you want backup all datafiles)
-# but probably YOU ARE BETTER SERVED with 'protect'!
-# installer.backup(MYPKG, files=MYDATAFILES)
-
-# protects data files from overwritten on updates, if files
-# like 'mypkg.conf' exist they are not overwritten,
-# by default '.conf', '.cfg', '.ini' and '.yaml' files
-#  are protected, you can change this by passing
-#  e.g. fns=('*.db','data.csv')
-# (comment the next line if you want the pip's
-#  default behaviour of overwritten the datafiles)
-MYDATAFILES = installer.protect(MYPKG, MYDATAFILES)
+installer.backup(MYPKG, files=MYDATAFILES)
 
 # create the data folder and tell setup to put the data files there
 try:
@@ -79,6 +68,10 @@ setup(
 )
 
 # but we are NOT READY, in some cases the data files
-# don't have the appropriate permissions,
-# let's fix that...
+# don't have the appropriate permissions and 'pip'
+# overwrites all data files that have been 
+# previously installed (even if they have been changed!).
+# By default '.conf', '.cfg', '.ini' and '.yaml' files
+# are protected, you can change this by passing
+# parameter 'fns', e.g. fns=('*.db','data.csv'), to 'pos_setup'.
 installer.pos_setup(MYDATAFILES)

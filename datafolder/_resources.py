@@ -45,18 +45,7 @@ installer = Installer(sys.argv)
 installer.support(SUPPORT)
 
 # checks if there are already data files and makes a backup
-# (uncomment if you want backup all datafiles)
-# but probably YOU ARE BETTER SERVED with 'protect'!
-# installer.backup(MYPKG, files=MYDATAFILES)
-
-# protects data files from overwritten on updates, if files
-# like 'mypkg.conf' exist they are not overwritten,
-# by default '.conf', '.cfg', '.ini' and '.yaml' files
-#  are protected, you can change this by passing
-#  e.g. fns=('*.db','data.csv')
-# (comment the next line if you want the pip's
-#  default behaviour of overwritten the datafiles)
-MYDATAFILES = installer.protect(MYPKG, MYDATAFILES)
+installer.backup(MYPKG, files=MYDATAFILES)
 
 # create the data folder and tell setup to put the data files there
 try:
@@ -84,8 +73,12 @@ setup(
 )
 
 # but we are NOT READY, in some cases the data files
-# don't have the appropriate permissions,
-# let's fix that...
+# don't have the appropriate permissions and 'pip'
+# overwrites all data files that have been 
+# previously installed (even if they have been changed!).
+# By default '.conf', '.cfg', '.ini' and '.yaml' files
+# are protected, you can change this by passing
+# parameter 'fns', e.g. fns=('*.db','data.csv'), to 'pos_setup'.
 installer.pos_setup(MYDATAFILES)
 '''
 
@@ -130,18 +123,7 @@ installer = Installer(sys.argv)
 installer.support(SUPPORT)
 
 # checks if there are already data files and makes a backup
-# (uncomment if you want backup all datafiles)
-# but probably YOU ARE BETTER SERVED with 'protect'!
-# installer.backup(MYPKG, files=MYDATAFILES)
-
-# protects data files from overwritten on updates, if files
-# like 'mypkg.conf' exist they are not overwritten,
-# by default '.conf', '.cfg', '.ini' and '.yaml' files
-#  are protected, you can change this by passing
-#  e.g. fns=('*.db','data.csv')
-# (comment the next line if you want the pip's
-#  default behaviour of overwritten the datafiles)
-MYDATAFILES = installer.protect(MYPKG, MYDATAFILES)
+installer.backup(MYPKG, files=MYDATAFILES)
 
 # create the data folder and tell setup to put the data files there
 try:
@@ -169,8 +151,12 @@ setup(
 )
 
 # but we are NOT READY, in some cases the data files
-# don't have the appropriate permissions,
-# let's fix that...
+# don't have the appropriate permissions and 'pip'
+# overwrites all data files that have been 
+# previously installed (even if they have been changed!).
+# By default '.conf', '.cfg', '.ini' and '.yaml' files
+# are protected, you can change this by passing
+# parameter 'fns', e.g. fns=('*.db','data.csv'), to 'pos_setup'.
 installer.pos_setup(MYDATAFILES)
 '''
 
@@ -253,7 +239,7 @@ def find_location(foldername):
                 if os.path.isdir(place):
                     data_dir = place
                     break
-    return data_dir if os.path.isdir(data_dir) else None
+    return data_dir if data_dir and os.path.isdir(data_dir) else None
 
 def data_files(foldername):
     """Tuple of datafiles with full path."""
@@ -272,6 +258,41 @@ def backup_file(fp):
             newfp = name + '_BACKUP' + ext
         return copyfile(fp, newfp)
     return
+
+def protect(datapath, fns=None):
+    """Recovers 'protected' datafiles."""
+    if not fns:
+        fns = PROTECT_DEFAULTS
+    fnsindir = os.listdir(datapath)
+    fnprot = []
+    for fn in fns:
+        if '*' in fn:
+            filels = fnmatch.filter(fnsindir, fn)
+            fnprot.extend(filels)
+        else:
+            if fn in fnsindir:
+                fnprot.append(file)
+    if not fnprot:
+        return False
+    changed = False
+    for fn in fnprot:
+        fbase, ext = os.path.splitext(fn)
+        backf = fbase + '_BACKUP' + ext
+        backfp = os.path.join(datapath, backf)
+        if os.path.isfile(backfp):
+            fnp = os.path.join(datapath, fn)
+            copyfile(backfp, fnp)
+            print('file %s restored' % fn)
+            changed = True
+            continue
+        orif = fbase + '_ORIGINAL' + ext
+        orifp = os.path.join(datapath, orif)
+        if os.path.isfile(orifp):
+            fnp = os.path.join(datapath, fn)
+            copyfile(orifp, fnp)
+            print('file %s restored' % fn)
+            changed = True
+    return changed
 
 
 ## MAIN CLASSES
@@ -362,32 +383,6 @@ class Installer(object):
         self.DATAPATH = installpath
         return self.DATAPATH
 
-
-    def protect(self, datadir, datafiles, fns=None):
-        """Protect datafiles from overwriten.
-
-        Only installs files if don't exist yet.
-        """
-        if not self.FIRSTRUN:
-            # Do nothing!
-            return datafiles
-        if not fns:
-            fns = PROTECT_DEFAULTS
-        datafolder = find_location(datadir)
-        if not datafolder:
-            return datafiles
-        fnsindir = os.listdir(datafolder)
-        fnfilter = []
-        for fn in fns:
-            if '*' in fn:
-                filels = fnmatch.filter(fnsindir, fn)
-                fnfilter.extend(filels)
-            else:
-                if fn in fnsindir:
-                    fnfilter.append(file)
-        return (file for file in datafiles if file not in fnfilter)
-
-
     def backup(self, datadir, files=None):
         """Backup data files.
 
@@ -411,7 +406,7 @@ class Installer(object):
             backup_file(fp)
         return True
 
-    def pos_setup(self, datafiles):
+    def pos_setup(self, datafiles, fns=None):
         if not self.WINDOWS and self.SECONDRUN:
             for dat in datafiles:
                 datp = os.path.join(self.DATAPATH, dat)
@@ -423,6 +418,8 @@ class Installer(object):
                     print('changing mode of %s to 666' % dat)
                 except:
                     print('Warning: permissions not set for file %s' % dat)
+        if self.SECONDRUN:
+            protect(self.DATAPATH, fns)
 
     def support(self, pys=None):
         if not self.FIRSTRUN:

@@ -2,6 +2,9 @@
     :target: https://travis-ci.org/xlcnd/datafolder
     :alt: Built Status
 
+.. image:: https://pypip.in/license/datafolder/badge.svg?style=flat
+    :target: https://pypi.python.org/pypi/datafolder/
+    :alt: License
 
 
 ``datafolder`` is a small python library that makes it very easy to **install**

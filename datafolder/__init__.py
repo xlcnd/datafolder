@@ -26,7 +26,7 @@
 
 __all__ = ('mkboot', 'mktpl')
 
-__version__ = '0.3.5'                                       # <-- literal IDs
+__version__ = '0.3.6'                                       # <-- literal IDs
 __support__ = ('2.6', '2.7', '3.1', '3.2', '3.3', '3.4')    # <-- literal IDs
 
 

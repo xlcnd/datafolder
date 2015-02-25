@@ -1,4 +1,4 @@
-.. image:: https://travis-ci.org/xlcnd/datafolder.svg?branch=v0.3.5
+.. image:: https://travis-ci.org/xlcnd/datafolder.svg?branch=v0.3.6
     :target: https://travis-ci.org/xlcnd/datafolder
     :alt: Built Status
 

@@ -23,16 +23,6 @@ def write2file(fp, text):
         f.write(text)
 
 
-def append2file(fp, text):
-    """Helper to append to a file."""
-    if os.path.isfile(fp):
-        with open(fp, 'a') as f:
-            f.write(text)
-    else:
-        print('File %s not found!' % fp)
-        return 1
-
-
 def backup_file(fp):
     """Append _ORIGINAL or _BACKUP to the file name."""
     if os.path.isfile(fp):
@@ -55,13 +45,14 @@ def mktpl():
     write2file(TPL_FILE, TPLDUMB)
 
 
-def mkmanifest(content):
+def mkmanifest(content, fp='MANIFEST.in'):
     """Make 'MANIFEST.in'."""
-    fp = 'MANIFEST.in'
     if os.path.isfile(fp):
-        append2file(fp, content)
-    else:
-        write2file(fp, content)
+        with open(fp, 'r') as f:
+            old_content = f.read()
+        content = content + old_content
+        content = EOL.join(sorted(set(content.strip(EOL).split(EOL))))
+    write2file(fp, content)
 
 
 def dirfiles(path):

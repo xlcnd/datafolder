@@ -192,7 +192,7 @@ BOOT = r'''# -*- coding: utf-8 -*-
 
 ###         PUT THIS FILE INSIDE YOUR PROJECT
 
-__version__ = '0.3.6'
+__version__ = '0.3.7'
 
 import fnmatch
 import os

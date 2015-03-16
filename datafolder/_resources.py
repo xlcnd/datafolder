@@ -338,6 +338,8 @@ class Installer(object):
 
     @staticmethod
     def _uxchown(fp):
+        if self.WINDOWS:
+            return
         from pwd import getpwnam, getpwuid
         from grp import getgrnam, getgrgid
         uid = getpwnam(os.getenv("SUDO_USER",

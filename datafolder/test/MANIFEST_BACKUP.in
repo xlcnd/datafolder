@@ -1,0 +1,11 @@
+include *.md
+include *.rst
+include *.txt
+include prjname/*.conf
+include prjname/*.cvs
+include prjname/*.dat
+include prjname/*.db
+include prjname/*.pdf
+include prjname/*.yaml
+include prjname/.yaml
+include prjname/NOEXTFILE

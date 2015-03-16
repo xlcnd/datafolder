@@ -69,7 +69,7 @@ setup(
 
 # but we are NOT READY, in some cases the data files
 # don't have the appropriate permissions and 'pip'
-# overwrites all data files that have been 
+# overwrites all data files that have been
 # previously installed (even if they have been changed!).
 # By default '.conf', '.cfg', '.ini' and '.yaml' files
 # are protected, you can change this by passing

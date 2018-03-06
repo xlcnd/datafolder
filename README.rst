@@ -2,7 +2,7 @@
     :target: https://travis-ci.org/xlcnd/datafolder
     :alt: Built Status
 
-.. image:: https://pypip.in/license/datafolder/badge.svg?style=flat
+.. image:: https://img.shields.io/pypi/l/datafolder.svg?style=flat
     :target: https://pypi.python.org/pypi/datafolder/
     :alt: License
 
